@@ -1,0 +1,22 @@
+.logo {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+
+        .image {
+            transform: scale(1.2) rotate(1turn);
+        }
+    }
+}
+
+.image {
+    transition: transform .3s ease 0s;
+}
+
+.text {
+    color: #000;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
