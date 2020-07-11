@@ -1,7 +1,13 @@
 import React from 'react';
 
+import styled from './footer.module.scss';
+
 function Footer() {
-	return <div style={{ height: '50px' }}>footer</div>;
+	return (
+		<footer className={styled.footer}>
+			<div className="container">footer</div>
+		</footer>
+	);
 }
 
 export default Footer;
