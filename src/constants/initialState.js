@@ -1,12 +1,9 @@
 export default {
-    phones: {},
     phonesPage: {
         ids: [],
-        search: ''
+        search: '',
     },
     phonePage: {
-        id: null
+        id: null,
     },
-    basket: [],
-    categories: {}
 };
