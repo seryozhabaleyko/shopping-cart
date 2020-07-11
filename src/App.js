@@ -1,32 +1,32 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-import Header from './components/header';
-import Footer from './components/footer';
-import Phones from './pages/phones';
-import Phone from './pages/phone';
-import Basket from './pages/basket';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Catalog from './containers/CatalogContainer';
+import Product from './containers/ProductContainer';
+import Cart from './pages/Cart';
 
 function App() {
-
     return (
         <>
-            <Header/>
+            <Header />
             <Switch>
-                <Route path='/' exact>
-                    <Phones/>
+                <Route path="/" exact>
+                    <Redirect to="/catalog" />
                 </Route>
-                <Route path='/categories/:id'>
-                    <Phones/>
+                <Route path="/catalog">
+                    <Catalog />
                 </Route>
-                <Route path='/phone/:id'>
-                    <Phone/>
+                <Route path="/catalog/:sulg">
+                    <Catalog />
                 </Route>
-                <Route path='/basket'>
-                    <Basket/>
+                <Route path="/product/:id" component={Product} />
+                <Route path="/cart">
+                    <Cart />
                 </Route>
             </Switch>
-            <Footer/>
+            <Footer />
         </>
     );
 }
