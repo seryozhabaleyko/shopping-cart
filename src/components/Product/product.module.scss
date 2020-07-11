@@ -1,0 +1,78 @@
+.product {
+    position: relative;
+
+    border: 2px solid #f4f4f4;
+
+    transition: border .3s ease 0s;
+
+    &:hover {
+        border: 2px solid #eb0028;
+    }
+}
+
+.image {
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+
+        .actions {
+            transform: translateY(0);
+        }
+    }
+}
+
+.actions {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    transform: translateY(105%);
+    transition: transform .3s ease 0s;
+}
+
+.btnLinkView,
+.btnAddToCart {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-align: center;
+    padding: 15px 10px;
+    transition: all .3s ease 0s;
+
+    &:hover {
+        background-color: #eb0028;
+        color: #fff;
+    }
+}
+
+.btnLinkView {
+    color: #fff;
+    background: #333;
+}
+
+.btnAddToCart {
+    cursor: pointer;
+    border: none;
+    border-radius: none;
+    outline: none;
+    color: #333;
+    background: #fff;
+}
+
+.detail {
+    padding: 20px;
+    text-align: center;
+    background: #f4f4f4;
+}
+
+.title {
+    margin: 0 0 1rem 0;
+}
+
+.price {
+    font-size: 20px;
+    color: #eb0028;
+}
