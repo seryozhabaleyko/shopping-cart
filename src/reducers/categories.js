@@ -1,14 +1,26 @@
 import * as R from 'ramda';
 
-import * as types from '../constants/types';
-import initialState from '../constants/initialState';
+import {
+	GET_CATEGORIES_REQUEST,
+	GET_CATEGORIES_SUCCESS,
+	GET_CATEGORIES_FAILURE
+} from '../constants/actionTypes';
 
-export default (state = initialState.categories, { type, payload }) => {
-    switch (type) {
-        case types.categories.SUCCESS:
-            const newValues = R.indexBy(R.prop('id'), payload);
-            return R.merge(state, newValues);
-        default:
-            return state;
-    }
+const initialState = {
+	isLoading: false,
+	data: [],
+	errorMessage: null
+};
+
+export default (state = initialState, { type, payload }) => {
+	switch (type) {
+		case GET_CATEGORIES_REQUEST:
+			return { ...state, isLoading: true, errorMessage: null };
+		case GET_CATEGORIES_SUCCESS:
+			return { ...state, isLoading: false, data: R.indexBy(R.prop('id'), payload) };
+		case GET_CATEGORIES_FAILURE:
+			return { ...state, isLoading: false, errorMessage: payload };
+		default:
+			return state;
+	}
 };
