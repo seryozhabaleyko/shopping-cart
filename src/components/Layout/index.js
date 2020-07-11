@@ -1,12 +1,15 @@
 import React from 'react';
 
-import Sidebar from '../sidebar';
+import { isContainer } from '../../helpers';
 
-const Layout = ({ children }) => (
-	<main className="main">
-		<Sidebar />
-		<section className="content">{children}</section>
-	</main>
-);
+import styled from './layout.module.scss';
+
+function Layout({ children, breakpoint = '' }) {
+    return (
+        <main className={styled.main}>
+            <div className={isContainer(breakpoint)}>{children}</div>
+        </main>
+    );
+}
 
 export default Layout;
