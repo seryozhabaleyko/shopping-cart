@@ -1,21 +1,31 @@
 import * as R from 'ramda';
 
-import phones from './mockPhones';
-import categories from './mockCategories'
+import catalog from './mockCatalog';
+import categories from './mockCategories';
 
-export const fetchPhones = async () => new Promise((resolve, reject) => {
-    resolve(phones);
-});
+export const fetchCatalog = async () =>
+    new Promise((resolve, reject) => {
+        setTimeout(() => resolve(catalog), 3000);
+    });
 
-export const loadMorePhones = async ({ offset }) => new Promise((resolve, reject) => {
-    resolve(phones);
-});
+export const fetchProductByIdApi = async (id) =>
+    new Promise((resolve, reject) => {
+        const product = R.find(R.propEq('id', id), catalog);
+        resolve(product);
+    });
 
-export const fetchPhoneById = async (id) => new Promise((resolve, reject) => {
-    const phone = R.find(R.propEq('id', id), phones);
-    resolve(phone);
-});
+export const loadMorePhones = async ({ offset }) =>
+    new Promise((resolve, reject) => {
+        resolve(catalog);
+    });
 
-export const fetchCategories = async () => new Promise((resolve, reject) => {
-    resolve(categories);
-});
+export const fetchPhoneById = async (id) =>
+    new Promise((resolve, reject) => {
+        const phone = R.find(R.propEq('id', id), catalog);
+        resolve(phone);
+    });
+
+export const fetchCategories = async () =>
+    new Promise((resolve, reject) => {
+        resolve(categories);
+    });
