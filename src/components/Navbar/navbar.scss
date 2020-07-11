@@ -1,0 +1,27 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--navbar-height, 60px);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.9);
+    -webkit-box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+
+    display: flex;
+    align-items: center;
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.nav {
+
+}
