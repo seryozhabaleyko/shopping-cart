@@ -1,18 +1,17 @@
 import React from 'react';
 
-import BasketCart from '../basketCart';
+import Cart from '../Cart';
 import Search from '../search';
 import Categories from '../categories';
 
 const Sidebar = () => {
-
-    return (
-        <aside className='sidebar'>
-            <BasketCart/>
-            <Search/>
-            <Categories/>
-        </aside>
-    );
+	return (
+		<aside className="sidebar">
+			<Cart />
+			<Search />
+			<Categories />
+		</aside>
+	);
 };
 
 export default Sidebar;
