@@ -1,0 +1,14 @@
+.alert {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: white;
+    border-left: 3px solid rgb(236, 76, 71);
+    box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset;
+}
+
+.icon {
+    display: flex;
+    margin-right: 10px;
+}
