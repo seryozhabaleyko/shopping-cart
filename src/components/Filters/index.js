@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Manufacturer from './Manufacturer';
+import RangeMinMaxPrice from './RangeMinMaxPrice';
 
 import styled from './filters.module.scss';
 
@@ -9,6 +10,7 @@ function Filters() {
         <div className={styled.filters}>
             Filters
             <Manufacturer />
+            <RangeMinMaxPrice />
         </div>
     );
 }
