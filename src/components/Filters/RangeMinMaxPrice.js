@@ -1,23 +1,21 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { setMinPriceFilter, setMaxPriceFilter } from '../../actions/filterBy';
 
 import styled from './RangeMinMaxPrice.module.scss';
 
-function debounce(f, ms) {
-    let isCooldown = false;
-
-    return function () {
-        if (isCooldown) return;
-        f.apply(this, arguments);
-        isCooldown = true;
-        setTimeout(() => (isCooldown = false), ms);
-    };
-}
-
 function RangeMinMaxPrice() {
     const dispatch = useDispatch();
+
+    const [debouncedCallback1] = useDebouncedCallback((value) => {
+        dispatch(setMinPriceFilter(value));
+    }, 500);
+
+    const [debouncedCallback2] = useDebouncedCallback((value) => {
+        dispatch(setMaxPriceFilter(value));
+    }, 500);
 
     return (
         <div className={styled.range}>
@@ -29,10 +27,7 @@ function RangeMinMaxPrice() {
                 defaultValue="200"
                 min="0"
                 max="1000"
-                onChange={debounce(
-                    (event) => dispatch(setMinPriceFilter(event.target.value)),
-                    2000,
-                )}
+                onChange={(e) => debouncedCallback1(e.target.value)}
             />
             <input
                 type="number"
@@ -41,7 +36,7 @@ function RangeMinMaxPrice() {
                 defaultValue="800"
                 min="0"
                 max="1000"
-                onChange={(event) => dispatch(setMaxPriceFilter(event.target.value))}
+                onChange={(e) => debouncedCallback2(e.target.value)}
             />
         </div>
     );
