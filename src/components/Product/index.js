@@ -6,7 +6,7 @@ import { addToCart } from '../../actions/cart';
 
 import styled from './product.module.scss';
 
-function Product({ addToCart, id, name, image }) {
+function Product({ addToCart, id, name, image, price }) {
     return (
         <div className={styled.product}>
             <div className={styled.image}>
@@ -28,7 +28,7 @@ function Product({ addToCart, id, name, image }) {
             </div>
             <div className={styled.detail}>
                 <h3 className={styled.title}>{name}</h3>
-                <div className={styled.price}>$1500</div>
+                <div className={styled.price}>{`$ ${price.toLocaleString()}`}</div>
             </div>
         </div>
     );
