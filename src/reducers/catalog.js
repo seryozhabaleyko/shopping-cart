@@ -1,7 +1,5 @@
 import * as R from 'ramda';
 
-import * as types from '../constants/types';
-
 import {
     GET_CATALOG_REQUEST,
     GET_CATALOG_SUCCESS,
@@ -9,12 +7,14 @@ import {
     LOAD_MORE_SECCESS,
     LOAD_MORE_REQUEST,
     LOAD_MORE_FAILURE,
+    SORT_BY,
 } from '../constants/actionTypes';
 
 const initialState = {
     isLoading: false,
     data: [],
     errorMessage: null,
+    sortBy: '',
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -33,8 +33,9 @@ export default (state = initialState, { type, payload }) => {
         case LOAD_MORE_FAILURE:
             return { ...state, isLoading: false, errorMessage: payload };
 
-        case types.phone.SUCCESS:
-            return R.assoc(payload.id, payload, state);
+        case SORT_BY:
+            return { ...state, sortBy: payload };
+
         default:
             return state;
     }
