@@ -3,6 +3,7 @@ export default [
         id: '1',
         categoryId: '1',
         name: 'Apple iPhone 5c',
+        manufacturer: 'Apple',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 823,
@@ -19,6 +20,7 @@ export default [
         id: '2',
         categoryId: '1',
         name: 'Apple iPhone 6',
+        manufacturer: 'Apple',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 953,
@@ -35,6 +37,7 @@ export default [
         id: '3',
         categoryId: '4',
         name: 'Lenovo A6000',
+        manufacturer: 'Lenovo',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 764,
@@ -51,9 +54,10 @@ export default [
         id: '4',
         categoryId: '5',
         name: 'Nokia Lumia 1520',
+        manufacturer: 'Nokia',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
-        price: 674,
+        price: 400,
         image: '/uploads/4.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -67,9 +71,10 @@ export default [
         id: '5',
         categoryId: '3',
         name: 'HTC One',
+        manufacturer: 'HTC',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
-        price: 674,
+        price: 200,
         image: '/uploads/5.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -83,9 +88,10 @@ export default [
         id: '6',
         categoryId: '2',
         name: 'Samsung Galaxy S6',
+        manufacturer: 'Samsung',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
-        price: 674,
+        price: 1232,
         image: '/uploads/6.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -99,9 +105,10 @@ export default [
         id: '7',
         categoryId: '2',
         name: 'Samsung Galaxy S6',
+        manufacturer: 'Samsung',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
-        price: 674,
+        price: 2346,
         image: '/uploads/7.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -115,9 +122,10 @@ export default [
         id: '8',
         categoryId: '2',
         name: 'Samsung Galaxy S6',
+        manufacturer: 'Samsung',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
-        price: 674,
+        price: 1504,
         image: '/uploads/8.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
