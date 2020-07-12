@@ -1,17 +1,61 @@
 import * as R from 'ramda';
 import { createSelector } from 'reselect';
 
+/* const fulterByManufacturer = (state) => state.filterBy.manufacturer;
+const phonesItems = (state) => state.catalog.data; */
+
+const filterPhonesByManufacturer = createSelector(
+    (state) => state.filterBy.manufacturer,
+    (state) => state.catalog.data,
+    (filterBy, phones) => {
+        const sortBy = (sortType) => {
+            return (phones) => {
+                switch (sortType) {
+                    case 'ASC':
+                        return R.sort(R.ascend(R.prop('price')), phones);
+                    case 'DESC':
+                        return R.sort(R.descend(R.prop('price')), phones);
+                    default:
+                        return phones;
+                }
+            };
+        };
+
+        const fulterByManufacturer = (filterBy) => {
+            return (phones) =>
+                R.ifElse(
+                    R.always(R.length(filterBy)),
+                    R.always(
+                        R.filter(
+                            (item) =>
+                                R.find((filter) =>
+                                    R.equals(
+                                        R.toLower(R.prop('manufacturer', item)),
+                                        R.toLower(filter),
+                                    ),
+                                )(filterBy),
+                            phones,
+                        ),
+                    ),
+                    R.always(phones),
+                )();
+        };
+
+        return R.compose(sortBy('ASC'), fulterByManufacturer(filterBy), R.values)(phones);
+    },
+);
+
 const catalogIsLoading = (state) => state.catalog.isLoading;
 const catalogItems = (state) => state.catalog.data;
 const catalogErrorMessage = (state) => state.catalog.errorMessage;
 
 export const getCatalog = createSelector(
     catalogIsLoading,
-    catalogItems,
+    filterPhonesByManufacturer,
     catalogErrorMessage,
     (isLoading, items, errorMessage) => ({
         isLoading,
-        items: R.compose(R.values())(items),
+        items,
         errorMessage,
     }),
 );
