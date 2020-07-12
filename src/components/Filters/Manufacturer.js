@@ -1,21 +1,21 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import { manufacturer } from '../../constants/defaults';
 import Checkbox from '../Checkbox';
+import { addManufacturerToFilter, removeManufacturerFromFilter } from '../../actions/filterBy';
 
 import styled from './manufacturer.module.scss';
 
 function Manufacturer() {
-    const handleCheckboxChange = (event) => {
-        const name = event.target.name;
-        const checked = event.target.checked;
-        console.log(name);
-        console.log(checked);
+    const dispatch = useDispatch();
 
-        if (event.target.checked) {
-            // dispatch(addBrandToFilter(name));
+    const handleCheckboxChange = (event) => {
+        const { checked, name } = event.target;
+        if (checked) {
+            dispatch(addManufacturerToFilter(name));
         } else {
-            // dispatch(removeBrandFromFilter(name));
+            dispatch(removeManufacturerFromFilter(name));
         }
     };
 
