@@ -33,16 +33,12 @@ function Products() {
                     <Select
                         width={240}
                         height={40}
-                        defaultValue="default"
+                        defaultValue="new"
                         onChange={(event) => alert(event.target.value)}
                     >
-                        <option value="default" disabled>
-                            Выберите героя
-                        </option>
-                        <option value="Чебурашка">Чебурашка</option>
-                        <option value="Крокодил Гена">Крокодил Гена</option>
-                        <option value="Шапокляк">Шапокляк</option>
-                        <option value="Крыса Лариса">Крыса Лариса</option>
+                        <option value="new">Сначала новые</option>
+                        <option value="Чебурашка">Дешевые</option>
+                        <option value="Крокодил Гена">Дорогие</option>
                     </Select>
                 </div>
             </div>
