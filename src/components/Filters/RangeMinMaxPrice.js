@@ -9,11 +9,11 @@ import styled from './RangeMinMaxPrice.module.scss';
 function RangeMinMaxPrice() {
     const dispatch = useDispatch();
 
-    const [debouncedCallback1] = useDebouncedCallback((value) => {
+    const [debouncedCallbackMin] = useDebouncedCallback((value) => {
         dispatch(setMinPriceFilter(value));
     }, 500);
 
-    const [debouncedCallback2] = useDebouncedCallback((value) => {
+    const [debouncedCallbackMax] = useDebouncedCallback((value) => {
         dispatch(setMaxPriceFilter(value));
     }, 500);
 
@@ -23,20 +23,18 @@ function RangeMinMaxPrice() {
             <input
                 type="number"
                 name="price-min"
-                placeholder="от"
-                defaultValue="200"
+                placeholder="from"
                 min="0"
-                max="1000"
-                onChange={(e) => debouncedCallback1(e.target.value)}
+                max="Infinity"
+                onChange={(e) => debouncedCallbackMin(e.target.value)}
             />
             <input
                 type="number"
                 name="price-max"
-                placeholder="до"
-                defaultValue="800"
+                placeholder="to"
                 min="0"
-                max="1000"
-                onChange={(e) => debouncedCallback2(e.target.value)}
+                max="Infinity"
+                onChange={(e) => debouncedCallbackMax(e.target.value)}
             />
         </div>
     );
