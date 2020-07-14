@@ -1,6 +1,6 @@
 import { SORT_BY } from '../constants/actionTypes';
 
-const sortBy = (sortType) => ({
+export const sortBy = (sort) => ({
     type: SORT_BY,
-    payload: sortType,
+    payload: sort,
 });
