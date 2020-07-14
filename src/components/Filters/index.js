@@ -2,6 +2,8 @@ import React from 'react';
 
 import Manufacturer from './Manufacturer';
 import RangeMinMaxPrice from './RangeMinMaxPrice';
+import RAM from './RAM';
+import InternalStorage from './InternalStorage';
 
 import styled from './filters.module.scss';
 
@@ -11,6 +13,8 @@ function Filters() {
             Filters
             <Manufacturer />
             <RangeMinMaxPrice />
+            <RAM />
+            <InternalStorage />
         </div>
     );
 }
