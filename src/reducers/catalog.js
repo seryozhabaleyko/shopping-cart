@@ -11,27 +11,27 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    isLoading: false,
+    isLoading: true,
     data: [],
-    errorMessage: null,
-    sortBy: '',
+    error: null,
+    sortBy: { key: 'price', type: 'ASC' },
 };
 
 export default (state = initialState, { type, payload }) => {
     switch (type) {
         case GET_CATALOG_REQUEST:
-            return { ...state, isLoading: true, errorMessage: null };
+            return { ...state, isLoading: true, error: null };
         case GET_CATALOG_SUCCESS:
             return { ...state, isLoading: false, data: R.indexBy(R.prop('id'), payload) };
         case GET_CATALOG_FAILURE:
-            return { ...state, isLoading: false, errorMessage: payload };
+            return { ...state, isLoading: false, error: payload };
 
         case LOAD_MORE_REQUEST:
-            return { ...state, isLoading: true, errorMessage: null };
+            return { ...state, isLoading: true, error: null };
         case LOAD_MORE_SECCESS:
             return { ...state, isLoading: false, data: R.indexBy(R.prop('id'), payload) };
         case LOAD_MORE_FAILURE:
-            return { ...state, isLoading: false, errorMessage: payload };
+            return { ...state, isLoading: false, error: payload };
 
         case SORT_BY:
             return { ...state, sortBy: payload };
