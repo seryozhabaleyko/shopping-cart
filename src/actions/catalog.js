@@ -19,15 +19,15 @@ const catalogSuccess = (phones) => ({
     payload: phones,
 });
 
-const catalogFailure = (errorMessage = defaultErrorMessage) => ({
+const catalogFailure = (errorMessage = defaultErrorMessage, errorName) => ({
     type: GET_CATALOG_FAILURE,
-    payload: errorMessage,
+    payload: { message: errorMessage, name: errorName },
 });
 
 export const fetchCatalog = () => async (dispatch) => {
     dispatch(catalogRequest());
     try {
-        // throw new Error('Неверно указан номер месяца');
+        // throw new Error('Сервер временно недоступен.');
         const catalog = await fetchCatalogApi();
         dispatch(catalogSuccess(catalog));
     } catch (error) {
