@@ -3,6 +3,8 @@ import {
     REMOVE_MANUFACTURER_FROM_FILTER,
     SET_MIN_PRICE_FILTER,
     SET_MAX_PRICE_FILTER,
+    ADD_RAM_TO_FILTER,
+    REMOVE_RAM_FROM_FILTER,
 } from '../constants/actionTypes';
 
 export const addManufacturerToFilter = (manufacturer) => ({
@@ -15,12 +17,22 @@ export const removeManufacturerFromFilter = (manufacturer) => ({
     payload: manufacturer,
 });
 
-export const setMinPriceFilter = (min) => ({
+export const setMinPriceFilter = (minPrice) => ({
     type: SET_MIN_PRICE_FILTER,
-    payload: min,
+    payload: minPrice,
 });
 
-export const setMaxPriceFilter = (max) => ({
+export const setMaxPriceFilter = (maxPrice) => ({
     type: SET_MAX_PRICE_FILTER,
-    payload: max,
+    payload: maxPrice,
+});
+
+export const addRAMToFilter = (RAM) => ({
+    type: ADD_RAM_TO_FILTER,
+    payload: RAM,
+});
+
+export const removeRAMFromFilter = (RAM) => ({
+    type: REMOVE_RAM_FROM_FILTER,
+    payload: RAM,
 });
