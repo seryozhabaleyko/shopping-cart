@@ -14,3 +14,9 @@ export const isContainer = (breakpoint) => {
             return 'container';
     }
 };
+
+export const isLength = (items) => {
+    return items.length
+        ? items
+        : 'Упс! У нас нет таких товаров, попробуйте изменить условия поиска.';
+};
