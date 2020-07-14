@@ -1,26 +1,27 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Select, IconButton } from 'evergreen-ui';
 
-import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
-import Product from '../Product';
-import { getCatalog } from '../../selectors';
-import Alert from '../Alert';
-import Spinner from '../Spinner';
+import ProductList from '../ProductList';
+import { sortBy } from '../../actions/sortBy';
 
 import styled from './products.module.scss';
 
 function Products() {
-    const { isLoading, items: products, errorMessage } = useShallowEqualSelector(getCatalog);
+    const dispatch = useDispatch();
 
-    if (isLoading || (products.length === 0 && !errorMessage)) {
-        return <Spinner />;
-    }
-
-    if (errorMessage) {
-        return <Alert title={errorMessage} />;
-    }
-
-    console.log('Products', products[0]);
+    const handleChangeSelect = (event) => {
+        const { value } = event.target;
+        if (value === 'date') {
+            dispatch(sortBy({ key: 'date', type: 'ASC' }));
+        }
+        if (value === 'priceAscending') {
+            dispatch(sortBy({ key: 'price', type: 'ASC' }));
+        }
+        if (value === 'priceDescending') {
+            dispatch(sortBy({ key: 'price', type: 'DESC' }));
+        }
+    };
 
     return (
         <div className={styled.products}>
@@ -33,20 +34,16 @@ function Products() {
                     <Select
                         width={240}
                         height={40}
-                        defaultValue="new"
-                        onChange={(event) => alert(event.target.value)}
+                        defaultValue="priceAscending"
+                        onChange={handleChangeSelect}
                     >
-                        <option value="new">Сначала новые</option>
-                        <option value="Чебурашка">Дешевые</option>
-                        <option value="Крокодил Гена">Дорогие</option>
+                        <option value="date">Сначала новые</option>
+                        <option value="priceAscending">Сначала дешевые</option>
+                        <option value="priceDescending">Сначала дорогие</option>
                     </Select>
                 </div>
             </div>
-            <div className={styled.grid}>
-                {products.map((product) => (
-                    <Product key={product.id} {...product} />
-                ))}
-            </div>
+            <ProductList />
         </div>
     );
 }
