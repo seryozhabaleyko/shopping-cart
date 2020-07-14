@@ -7,6 +7,7 @@ export default [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 823,
+        ram: '2',
         image: '/uploads/1.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -24,6 +25,7 @@ export default [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 953,
+        ram: '3',
         image: '/uploads/2.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -41,6 +43,7 @@ export default [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 764,
+        ram: '6',
         image: '/uploads/3.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -58,6 +61,7 @@ export default [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 400,
+        ram: '8',
         image: '/uploads/4.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -75,6 +79,7 @@ export default [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 200,
+        ram: '4',
         image: '/uploads/5.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -92,6 +97,7 @@ export default [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 1232,
+        ram: '2',
         image: '/uploads/6.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -109,6 +115,7 @@ export default [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 2346,
+        ram: '4',
         image: '/uploads/7.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
@@ -126,6 +133,7 @@ export default [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies lorem odio, at laoreet tellus sodales in. Nullam maximus eros ut tortor ultricies rutrum. Aliquam euismod lacus non est egesta',
         price: 1504,
+        ram: '8',
         image: '/uploads/8.jpg',
         cpu: '1.3GHz Apple A6',
         camera: '8mp (3264x2448)',
