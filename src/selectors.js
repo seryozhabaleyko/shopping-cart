@@ -1,27 +1,50 @@
 import * as R from 'ramda';
 import { createSelector } from 'reselect';
 
-/* const fulterByManufacturer = (state) => state.filterBy.manufacturer;
-const phonesItems = (state) => state.catalog.data; */
-
-const filterPhonesByManufacturer = createSelector(
-    (state) => state.filterBy.manufacturer,
+const filterAndSortPhonesBy = createSelector(
+    (state) => state.filterBy,
+    (state) => state.catalog.sortBy,
     (state) => state.catalog.data,
-    (filterBy, phones) => {
-        const sortBy = (sortType) => {
-            return (phones) => {
-                switch (sortType) {
-                    case 'ASC':
-                        return R.sort(R.ascend(R.prop('price')), phones);
-                    case 'DESC':
-                        return R.sort(R.descend(R.prop('price')), phones);
-                    default:
-                        return phones;
-                }
-            };
+    (filterBy, sortBy, phones) => {
+        const sortByCase = (sortKey, sortType) => (phones) => {
+            switch (sortType) {
+                case 'ASC':
+                    return R.sort(R.ascend(R.prop(sortKey)), phones);
+                case 'DESC':
+                    return R.sort(R.descend(R.prop(sortKey)), phones);
+                default:
+                    return phones;
+            }
         };
 
-        const fulterByManufacturer = (filterBy) => {
+        const filterByRAM = (filterBy) => (phones) => {
+            if (R.length(filterBy)) {
+                return R.filter(
+                    (phone) => R.find((filter) => R.equals(R.prop('ram', phone), filter), filterBy),
+                    phones,
+                );
+            }
+            return phones;
+        };
+
+        const filterByPriceCase = (minPrice, maxPrice) => (phones) => {
+            if (minPrice && maxPrice) {
+                return R.filter(
+                    (phone) =>
+                        R.prop('price', phone) >= minPrice && R.prop('price', phone) <= maxPrice,
+                    phones,
+                );
+            }
+            if (minPrice) {
+                return R.filter((phone) => R.prop('price', phone) >= minPrice, phones);
+            }
+            if (maxPrice) {
+                return R.filter((phone) => R.prop('price', phone) <= maxPrice, phones);
+            }
+            return phones;
+        };
+
+        const filterByManufacturer = (filterBy) => {
             return (phones) =>
                 R.ifElse(
                     R.always(R.length(filterBy)),
@@ -41,23 +64,41 @@ const filterPhonesByManufacturer = createSelector(
                 )();
         };
 
-        return R.compose(sortBy('ASC'), fulterByManufacturer(filterBy), R.values)(phones);
+        return R.compose(
+            sortByCase(R.prop('key', sortBy), R.prop('type', sortBy)),
+            filterByRAM(R.prop('ram', filterBy)),
+            filterByPriceCase(
+                R.prop('min', R.prop('price', filterBy)),
+                R.prop('max', R.prop('price', filterBy)),
+            ),
+            filterByManufacturer(R.prop('manufacturer', filterBy)),
+            R.values,
+        )(phones);
     },
 );
 
 const catalogIsLoading = (state) => state.catalog.isLoading;
-const catalogItems = (state) => state.catalog.data;
-const catalogErrorMessage = (state) => state.catalog.errorMessage;
+const catalogError = (state) => state.catalog.error;
 
 export const getCatalog = createSelector(
     catalogIsLoading,
-    filterPhonesByManufacturer,
-    catalogErrorMessage,
-    (isLoading, items, errorMessage) => ({
-        isLoading,
-        items,
-        errorMessage,
-    }),
+    filterAndSortPhonesBy,
+    catalogError,
+    (isLoading, products, error) => {
+        const hasErrorMessage =
+            R.not(isLoading) && R.not(R.length(products)) && R.not(error)
+                ? {
+                      ...error,
+                      message: 'Упс! У нас нет таких товаров, попробуйте изменить условия поиска.',
+                  }
+                : error;
+
+        return {
+            isLoading,
+            products,
+            error: hasErrorMessage,
+        };
+    },
 );
 
 const productIsLoading = (state) => state.product.isLoading;
