@@ -1,14 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import * as R from 'ramda';
 
-import useActions from '../../hooks/useActions';
-import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
-import { loadMorePhones } from '../../actions/catalog';
-import { addPhoneToBasket } from '../../actions/cart';
-import { getPhones } from '../../selectors';
 import Layout from '../../components/Layout';
-
 import Products from '../../components/Products';
 import Filters from '../../components/Filters';
 
