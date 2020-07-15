@@ -4,6 +4,7 @@ import { Select, IconButton } from 'evergreen-ui';
 
 import ProductList from '../ProductList';
 import { sortBy } from '../../actions/sortBy';
+import LoadMore from '../LoadMore';
 
 import styled from './products.module.scss';
 
@@ -31,12 +32,7 @@ function Products() {
                     <IconButton icon="notifications" height={40} />
                 </div>
                 <div>
-                    <Select
-                        width={240}
-                        height={40}
-                        defaultValue="priceAscending"
-                        onChange={handleChangeSelect}
-                    >
+                    <Select width={240} height={40} defaultValue="priceAscending" onChange={handleChangeSelect}>
                         <option value="date">Сначала новые</option>
                         <option value="priceAscending">Сначала дешевые</option>
                         <option value="priceDescending">Сначала дорогие</option>
@@ -44,6 +40,7 @@ function Products() {
                 </div>
             </div>
             <ProductList />
+            <LoadMore />
         </div>
     );
 }
