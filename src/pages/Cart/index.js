@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as R from 'ramda';
+import classNames from 'classnames';
 
 import Layout from '../../components/Layout';
 import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
@@ -13,17 +14,33 @@ import styled from './cart.module.scss';
 function Cart() {
     const phones = useShallowEqualSelector((state) => getBasketPhonesWithCount(state));
     const totalPrice = useShallowEqualSelector((state) => getTheTotalCostOfTheBasket(state));
-    const isBasketEmpty = R.isEmpty(phones);
+    const isCartEmpty = R.isEmpty(phones);
 
-    const [
-        removePhoneFromBasketActionDispatch,
-        cleanBasketActionDispatch,
-        basketCheckoutActionDispatch,
-    ] = useActions([removePhoneFromBasket, cleanBasket, basketCheckout]);
+    const [removePhoneFromBasketActionDispatch, cleanBasketActionDispatch, basketCheckoutActionDispatch] = useActions([
+        removePhoneFromBasket,
+        cleanBasket,
+        basketCheckout,
+    ]);
+
+    console.log('isCartEmpty', isCartEmpty);
 
     return (
         <Layout breakpoint="xl">
-            <div className={styled.cart}>Cart</div>
+            <div className={styled.cart}>
+                <div className={styled.heading}>
+                    <h1 className={styled.title}>Корзина</h1>
+                </div>
+                {isCartEmpty && (
+                    <>
+                        <p className={styled.warning}>
+                            Корзина пуста. Перейдите в интернет-магазин, чтобы начать покупки.
+                        </p>
+                        <Link to="/" className={classNames('btn', 'btn-danger', styled.btnCartEmpty)}>
+                            Перейти в интернет-магазин
+                        </Link>
+                    </>
+                )}
+            </div>
         </Layout>
     );
 
