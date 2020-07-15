@@ -5,7 +5,7 @@ import categories from './mockCategories';
 
 export const fetchCatalog = async () =>
     new Promise((resolve, reject) => {
-        setTimeout(() => resolve(catalog), 3000);
+        setTimeout(() => resolve(catalog), 1000);
     });
 
 export const fetchProductByIdApi = async (id) =>
