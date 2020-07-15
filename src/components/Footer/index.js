@@ -1,13 +1,23 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import styled from './footer.module.scss';
 
 function Footer() {
-	return (
-		<footer className={styled.footer}>
-			<div className="container">footer</div>
-		</footer>
-	);
+    return (
+        <footer className={styled.footer}>
+            <section className={styled.top}>
+                <div className={classNames('container', styled.topWrap)}>
+                    <div>1</div>
+                    <div className="social">
+                        <div className="heading">Ищите нас в соц. сетях</div>
+                        <div className="list">12345</div>
+                    </div>
+                </div>
+            </section>
+            <div className="container">footer</div>
+        </footer>
+    );
 }
 
 export default Footer;
