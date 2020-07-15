@@ -4,7 +4,7 @@ import {
     GET_CATALOG_SUCCESS,
     GET_CATALOG_FAILURE,
     LOAD_MORE_REQUEST,
-    LOAD_MORE_SECCESS,
+    LOAD_MORE_SUCCESS,
     LOAD_MORE_FAILURE,
 } from '../constants/actionTypes';
 import { getRenderedPhonesLength } from '../selectors';
@@ -46,7 +46,7 @@ export const loadMorePhones = () => async (dispatch, getState) => {
         const phones = await loadMorePhonesApi({ offset });
 
         dispatch({
-            type: LOAD_MORE_SECCESS,
+            type: LOAD_MORE_SUCCESS,
             payload: phones,
         });
     } catch (error) {
