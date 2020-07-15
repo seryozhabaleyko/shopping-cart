@@ -1,3 +1,21 @@
 .cart {
     position: relative;
+    padding: 2rem 0;
+}
+
+.heading {
+    position: relative;
+}
+
+.title {
+    margin: 0;
+}
+
+.warning {
+    margin: 2rem 0;
+}
+
+.btnCartEmpty {
+    border-radius: 0!important;
+    font-size: 1.125rem!important;
 }
