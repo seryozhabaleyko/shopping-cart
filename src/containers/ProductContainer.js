@@ -1,34 +1,19 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import Product from '../pages/Product';
 import { fetchProductById } from '../actions/product';
-import { addToCart } from '../actions/cart';
+import Product from '../pages/Product';
 
-function ProductContainer({ fetchProductById, addToCart, match }) {
-    const { id } = match.params;
+function ProductContainer({ addToCart }) {
+    const { id } = useParams();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchProductById(id);
-    }, [fetchProductById, id]);
+        dispatch(fetchProductById(id));
+    }, [id]);
 
     return <Product addToCart={addToCart} />;
 }
 
-ProductContainer.propTypes = {
-    fetchProductById: PropTypes.func.isRequired,
-    addToCart: PropTypes.func.isRequired,
-    match: PropTypes.shape({
-        params: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-        }),
-    }),
-};
-
-const mapDispatchToProps = {
-    fetchProductById,
-    addToCart,
-};
-
-export default connect(null, mapDispatchToProps)(ProductContainer);
+export default ProductContainer;
