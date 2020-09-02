@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Checkbox } from 'antd';
 
 import { manufacturer } from '../../constants/defaults';
-import Checkbox from '../Checkbox';
 import { addManufacturerToFilter, removeManufacturerFromFilter } from '../../actions/filterBy';
 
 import styled from './manufacturer.module.scss';
@@ -25,7 +25,9 @@ function Manufacturer() {
             <ul className={styled.list}>
                 {manufacturer.map((label) => (
                     <li key={label}>
-                        <Checkbox name={label} label={label} onChange={handleCheckboxChange} />
+                        <Checkbox name={label} onChange={handleCheckboxChange}>
+                            {label}
+                        </Checkbox>
                     </li>
                 ))}
             </ul>
