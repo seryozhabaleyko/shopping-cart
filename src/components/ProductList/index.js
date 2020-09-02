@@ -21,8 +21,6 @@ function ProductList() {
         return <Alert title={message} />;
     }
 
-    console.log(products[0]);
-
     return (
         <div className={styled.grid}>
             {products.map((product) => (
