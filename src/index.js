@@ -7,14 +7,15 @@ import store from './store';
 import App from './App';
 
 import './index.scss';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<Router>
-				<App />
-			</Router>
-		</Provider>
-	</React.StrictMode>,
-	document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={store}>
+            <Router>
+                <App />
+            </Router>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root'),
 );
