@@ -1,6 +1,5 @@
 import React from 'react';
-
-import Checkbox from '../Checkbox';
+import { Checkbox } from 'antd';
 
 import styled from './InternalStorage.module.scss';
 
@@ -10,7 +9,7 @@ function InternalStorage() {
             <div className={styled.heading}>Internal storage</div>
             <div className={styled.list}>
                 {['32', '64', '128', '256'].map((label) => (
-                    <Checkbox key={label} label={`${label} GB`} />
+                    <Checkbox key={label}>{`${label} GB`}</Checkbox>
                 ))}
             </div>
         </div>
