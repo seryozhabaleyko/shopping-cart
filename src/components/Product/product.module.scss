@@ -2,22 +2,21 @@
     position: relative;
     overflow: hidden;
 
-    border: 2px solid #f4f4f4;
-    background: #f4f4f4;
+    // border: 2px solid #f4f4f4;
+    // background: #f4f4f4;
 
-    transition: border .3s ease 0s;
+    transition: border 0.3s ease 0s;
 
-    &:hover {
+    /* &:hover {
         border: 2px solid #e74c3c;
-    }
+    } */
 }
 
 .image {
     position: relative;
-    overflow: hidden;
+    border: 2px solid #ecedef;
 
     &:hover {
-
         .actions {
             transform: translateY(0);
         }
@@ -32,7 +31,7 @@
     display: grid;
     grid-template-columns: repeat(2, 50%);
     transform: translateY(105%);
-    transition: transform .3s ease 0s;
+    transition: transform 0.3s ease 0s;
 }
 
 .btnLinkView,
@@ -42,7 +41,7 @@
     font-size: 12px;
     text-align: center;
     padding: 15px 10px;
-    transition: all .3s ease 0s;
+    transition: all 0.3s ease 0s;
 
     &:hover {
         background-color: #e74c3c;
@@ -67,14 +66,6 @@
 .detail {
     padding: 20px;
     text-align: center;
-    background: #f4f4f4;
-
-    transition: transform .5s cubic-bezier(.77,0,.175,1);
-}
-
-.product:hover .detail {
-    transform: translateY(-56px);
-    transition: transform .5s cubic-bezier(.77,0,.175,1);
 }
 
 .title {
@@ -83,28 +74,21 @@
 
 .price {
     font-size: 20px;
-    color: #e74c3c;
+    color: #6ad295;
+    font-size: 22px;
+    font-weight: 500;
 }
 
 .addToCart {
-    position: absolute;
-    bottom: -100%;
-
-    width: 100%;
-    border-radius: 0!important;
-    padding: 15px 10px!important;
-    background-color: #e74c3c!important;
-    border-color: #e74c3c!important;
-
-    transition: all .5s cubic-bezier(.77,0,.175,1);
+    border-radius: 0 !important;
+    padding: 15px 10px !important;
+    background-color: #6ad295 !important;
+    border-color: #6ad295 !important;
+    border-radius: 30px !important;
+    text-transform: uppercase !important;
 
     &:hover {
-        background-color: #c0392b!important;
-        border-color: #c0392b!important;
+        background-color: #c0392b !important;
+        border-color: #c0392b !important;
     }
-}
-
-.product:hover .addToCart {
-    bottom: 0;
-    transition: all .5s cubic-bezier(.77,0,.175,1);
 }
