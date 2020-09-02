@@ -16,28 +16,20 @@ function Product({ id, name, image, price }) {
         <div className={styled.product}>
             <div className={styled.image}>
                 <Link to={`/product/${id}`}>
-                    <img src={image} alt={name} />
+                    <img src={image} loading="lazy" alt={name} />
                 </Link>
-                <div className={styled.actions}>
-                    <Link to={`/product/${id}`} className={styled.btnLinkView}>
-                        Quick View
-                    </Link>
-                    <button type="button" className={styled.btnAddToCart} onClick={handleAddToCartClick}>
-                        Add to Cart
-                    </button>
-                </div>
             </div>
             <div className={styled.detail}>
                 <h3 className={styled.title}>{name}</h3>
                 <div className={styled.price}>{`$ ${price.toLocaleString()}`}</div>
+                <button
+                    type="button"
+                    className={classNames('btn', 'btn-danger', styled.addToCart)}
+                    onClick={handleAddToCartClick}
+                >
+                    Add to Cart
+                </button>
             </div>
-            <button
-                type="button"
-                className={classNames('btn', 'btn-danger', styled.addToCart)}
-                onClick={handleAddToCartClick}
-            >
-                Add to Cart
-            </button>
         </div>
     );
 }
