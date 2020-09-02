@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Checkbox } from 'antd';
 
-import Checkbox from '../Checkbox';
 import { addRAMToFilter, removeRAMFromFilter } from '../../actions/filterBy';
 
 import styled from './RAM.module.scss';
@@ -22,12 +22,9 @@ function RAM() {
         <div className={styled.ram}>
             <div className={styled.heading}>RAM</div>
             {['2', '3', '4', '6', '8', '12'].map((ram) => (
-                <Checkbox
-                    key={ram}
-                    name={ram}
-                    label={`${ram} GB`}
-                    onChange={handleCheckboxChange}
-                />
+                <Checkbox key={ram} name={ram} onChange={handleCheckboxChange}>
+                    {`${ram} GB`}
+                </Checkbox>
             ))}
         </div>
     );
