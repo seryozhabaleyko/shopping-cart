@@ -1,3 +1,4 @@
+import { db } from '../services/firebase';
 import * as R from 'ramda';
 
 import catalog from './mockCatalog';
@@ -29,3 +30,10 @@ export const fetchCategories = async () =>
     new Promise((resolve, reject) => {
         resolve(categories);
     });
+
+export function fetchCatalogApi() {
+    return db
+        .collection('catalog')
+        .get()
+        .then((snapshot) => snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+}
