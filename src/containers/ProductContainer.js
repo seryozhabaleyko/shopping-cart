@@ -11,7 +11,7 @@ function ProductContainer({ addToCart }) {
 
     useEffect(() => {
         dispatch(fetchProductById(id));
-    }, [id]);
+    }, [dispatch, id]);
 
     return <Product addToCart={addToCart} />;
 }
