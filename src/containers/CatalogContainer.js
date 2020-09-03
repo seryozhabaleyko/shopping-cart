@@ -11,7 +11,7 @@ function CatalogContainer() {
     useEffect(() => {
         dispatch(fetchCatalog());
         dispatch(fetchCategories());
-    }, [fetchCatalog, fetchCategories]);
+    }, [dispatch, fetchCatalog, fetchCategories]);
 
     return <Catalog />;
 }
