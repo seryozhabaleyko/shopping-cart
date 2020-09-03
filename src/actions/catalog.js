@@ -1,4 +1,4 @@
-import { fetchCatalog as fetchCatalogApi, loadMorePhones as loadMorePhonesApi } from '../api';
+import { fetchCatalogApi, loadMorePhones as loadMorePhonesApi } from '../api';
 import {
     GET_CATALOG_REQUEST,
     GET_CATALOG_SUCCESS,
@@ -10,28 +10,28 @@ import {
 import { getRenderedPhonesLength } from '../selectors';
 import { defaultErrorMessage } from '../constants/defaults';
 
-const catalogRequest = () => ({
+const fetchCatalogRequest = () => ({
     type: GET_CATALOG_REQUEST,
 });
 
-const catalogSuccess = (phones) => ({
+const fetchCatalogSuccess = (phones) => ({
     type: GET_CATALOG_SUCCESS,
     payload: phones,
 });
 
-const catalogFailure = (errorMessage = defaultErrorMessage, errorName) => ({
+const fetchCatalogFailure = (errorMessage = defaultErrorMessage, errorName) => ({
     type: GET_CATALOG_FAILURE,
     payload: { message: errorMessage, name: errorName },
 });
 
 export const fetchCatalog = () => async (dispatch) => {
-    dispatch(catalogRequest());
+    dispatch(fetchCatalogRequest());
     try {
-        // throw new Error('Сервер временно недоступен.');
         const catalog = await fetchCatalogApi();
-        dispatch(catalogSuccess(catalog));
+        console.log('catalog', catalog);
+        dispatch(fetchCatalogSuccess(catalog));
     } catch (error) {
-        dispatch(catalogFailure(error.message, error.name));
+        dispatch(fetchCatalogFailure(error.message, error.name));
     }
 };
 
