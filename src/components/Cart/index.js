@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Badge, Tooltip } from 'antd';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
 import { getNumberOfProducts, getTheTotalCostOfTheBasket } from '../../selectors';
 import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
-
-import { ReactComponent as CartI } from './groceries.svg';
-import { ReactComponent as CartColorI } from './groceriesColor.svg';
 
 import styled from './cart.module.scss';
 
@@ -14,16 +13,13 @@ function Cart() {
     const totalCartValue = useShallowEqualSelector(getTheTotalCostOfTheBasket);
 
     return (
-        <Link to="/cart" className={styled.cart} title={`$${totalCartValue.toLocaleString()}`}>
-            <div className={styled.icon}>
-                {numberProductsInCart ? (
-                    <CartColorI width={24} height={24} />
-                ) : (
-                    <CartI width={24} height={24} />
-                )}
-                <span className={styled.number}>{numberProductsInCart.toLocaleString()}</span>
-            </div>
-        </Link>
+        <Tooltip title={`$${totalCartValue}`}>
+            <Link to="/cart" className={styled.cart}>
+                <Badge count={numberProductsInCart} size="small" showZero>
+                    <ShoppingCartOutlined style={{ fontSize: '24px', color: '#9e9e9e' }} />
+                </Badge>
+            </Link>
+        </Tooltip>
     );
 }
 
