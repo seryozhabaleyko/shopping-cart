@@ -7,8 +7,6 @@ import Filters from '../../components/Filters';
 import styled from './catalog.module.scss';
 
 function Catalog() {
-    // const shortDescription = `${R.take(60, phone.description)}...`;
-
     return (
         <Layout>
             <div className={styled.catalog}>
