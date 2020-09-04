@@ -15,19 +15,17 @@ import './style.scss';
 
 function Product() {
     const dispatch = useDispatch();
-    const { isLoading, data, error } = useShallowEqualSelector(getProductById);
+    const { loading, data, error } = useShallowEqualSelector(getProductById);
 
-    if (isLoading || (data.length === 0 && !error)) {
-        return null;
+    if (loading) {
+        return <p>loading...</p>;
     }
 
     if (error) {
-        return null;
+        return <p>{error.message}</p>;
     }
 
-    const phone = data || [];
-
-    const renderFields = () => {
+    /* const renderFields = () => {
         const columnField = R.compose(
             R.toPairs,
             R.pick(['cpu', 'camera', 'size', 'weight', 'display', 'battery', 'memory']),
@@ -41,59 +39,24 @@ function Product() {
                 <div className="details-info">{value}</div>
             </div>
         ));
-    };
-
-    const { name, image } = data;
+    }; */
 
     return (
         <>
             <Layout breakpoint="xl">
-                <div className={styled.product}>
+                {/* <div className={styled.product}>
                     <div className={styled.single}>
                         <figure className={classNames('figure', 'figure-img', styled.image)}>
-                            <img src={image} alt={name} />
+                            <img src={photoUrl} alt={title} />
                         </figure>
                         <div className={styled.info}>info</div>
                     </div>
-                </div>
+                </div> */}
             </Layout>
 
             <main className="container">
-                <aside className="sidebar">
-                    {phone && (
-                        <Fragment>
-                            <p>Quick shop</p>
-                            <Cart />
-                            <div>
-                                <h1>{phone.name}</h1>
-                                <h2>{phone.price}</h2>
-                            </div>
-                            <Link to="/phones" className="btn btn-primary">
-                                Back to store
-                            </Link>
-                            <button
-                                className="btn btn-primary"
-                                type="button"
-                                onClick={() => dispatch(addToCart(phone.id))}
-                            >
-                                Add to cart
-                            </button>
-                        </Fragment>
-                    )}
-                </aside>
-                <section className="content">
-                    {phone && (
-                        <article id="phone">
-                            <section>
-                                <img className="phone-img" src={phone.image} alt={phone.name} />
-                                <div className="phone-details">{renderFields()}</div>
-                            </section>
-                            <h4>{phone.name}</h4>
-                            <span>${phone.price}</span>
-                            <p>{phone.description}</p>
-                        </article>
-                    )}
-                </section>
+                <aside className="sidebar">sidebar</aside>
+                <section className="content">content</section>
             </main>
         </>
     );
