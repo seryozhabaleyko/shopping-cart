@@ -30,8 +30,7 @@ const filterAndSortPhonesBy = createSelector(
         const filterByPriceCase = (minPrice, maxPrice) => (phones) => {
             if (minPrice && maxPrice) {
                 return R.filter(
-                    (phone) =>
-                        R.prop('price', phone) >= minPrice && R.prop('price', phone) <= maxPrice,
+                    (phone) => R.prop('price', phone) >= minPrice && R.prop('price', phone) <= maxPrice,
                     phones,
                 );
             }
@@ -51,12 +50,9 @@ const filterAndSortPhonesBy = createSelector(
                     R.always(
                         R.filter(
                             (item) =>
-                                R.find((filter) =>
-                                    R.equals(
-                                        R.toLower(R.prop('manufacturer', item)),
-                                        R.toLower(filter),
-                                    ),
-                                )(filterBy),
+                                R.find((filter) => R.equals(R.toLower(R.prop('brand', item)), R.toLower(filter)))(
+                                    filterBy,
+                                ),
                             phones,
                         ),
                     ),
@@ -67,23 +63,35 @@ const filterAndSortPhonesBy = createSelector(
         return R.compose(
             sortByCase(R.prop('key', sortBy), R.prop('type', sortBy)),
             filterByRAM(R.prop('ram', filterBy)),
-            filterByPriceCase(
-                R.prop('min', R.prop('price', filterBy)),
-                R.prop('max', R.prop('price', filterBy)),
-            ),
-            filterByManufacturer(R.prop('manufacturer', filterBy)),
+            filterByPriceCase(R.prop('min', R.prop('price', filterBy)), R.prop('max', R.prop('price', filterBy))),
+            filterByManufacturer(R.prop('brand', filterBy)),
             R.values,
         )(phones);
     },
 );
 
-const catalogIsLoading = (state) => state.catalog.isLoading;
-const catalogError = (state) => state.catalog.error;
+const catalogLoadingSelector = (state) => state.catalog.loading;
+const catalogItemsSelector = (state) => state.catalog.data;
+const catalogErrorSelector = (state) => state.catalog.error;
+const catalogOrderBySelector = (state) => state.filterBy.orderBy;
+
+const foo = createSelector(catalogItemsSelector, catalogOrderBySelector, (items, orderBy) => {
+    return items.sort((a, b) => {
+        switch (orderBy) {
+            case 'price-asc':
+                return a.price - b.price;
+            case 'price-desc':
+                return b.price - a.price;
+            default:
+                return b.createdAt.toDate() - a.createdAt.toDate();
+        }
+    });
+});
 
 export const getCatalog = createSelector(
-    catalogIsLoading,
-    filterAndSortPhonesBy,
-    catalogError,
+    catalogLoadingSelector,
+    foo,
+    catalogErrorSelector,
     (isLoading, products, error) => {
         const hasErrorMessage =
             R.not(isLoading) && R.not(R.length(products)) && R.not(error)
@@ -146,7 +154,7 @@ export const getTheTotalCostOfTheBasket = (state) => {
         R.map((id) => getPhoneById(state, id)),
     )(state.cart);
 
-    return totalPrice;
+    return totalPrice.toLocaleString();
 };
 
 export const getCategories = (state) => R.values(state.categories);
