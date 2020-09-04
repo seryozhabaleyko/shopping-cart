@@ -18,9 +18,6 @@ function App() {
                 <Route path="/catalog">
                     <Catalog />
                 </Route>
-                <Route path="/catalog/:slug">
-                    <Catalog />
-                </Route>
                 <Route path="/product/:id" component={Product} />
                 <Route path="/cart">
                     <Cart />
