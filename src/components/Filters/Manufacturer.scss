@@ -1,0 +1,8 @@
+.ant-list-item {
+    border-bottom: none !important;
+    padding: 0 0 5px 0 !important;
+
+    &:last-child {
+        padding-bottom: 0 !important;
+    }
+}
