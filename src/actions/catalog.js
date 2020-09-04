@@ -24,11 +24,10 @@ const fetchCatalogFailure = (errorMessage = defaultErrorMessage, errorName) => (
     payload: { message: errorMessage, name: errorName },
 });
 
-export const fetchCatalog = () => async (dispatch) => {
+export const fetchCatalog = (queryParameters) => async (dispatch) => {
     dispatch(fetchCatalogRequest());
     try {
-        const catalog = await fetchCatalogApi();
-        console.log('catalog', catalog);
+        const catalog = await fetchCatalogApi(queryParameters);
         dispatch(fetchCatalogSuccess(catalog));
     } catch (error) {
         dispatch(fetchCatalogFailure(error.message, error.name));
