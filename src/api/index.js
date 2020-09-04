@@ -31,9 +31,8 @@ export const fetchCategories = async () =>
         resolve(categories);
     });
 
-export function fetchCatalogApi() {
-    return db
-        .collection('catalog')
-        .get()
-        .then((snapshot) => snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+export function fetchCatalogApi({ limit = 8 }) {
+    const catalogCollectionRef = db.collection('catalog').orderBy('createdAt', 'desc').limit(limit);
+
+    return catalogCollectionRef.get().then((snapshot) => snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 }
