@@ -1,31 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
+import classNames from 'classnames';
+import { Typography, Button, Image } from 'antd';
 
 import { addToCart } from '../../actions/cart';
 
 import styled from './product.module.scss';
 
-function Product({ id, name, image, price }) {
-    const dispatch = useDispatch();
+const { Title } = Typography;
 
-    const handleAddToCartClick = () => dispatch(addToCart(id));
+function ProductCard({ id, title, photoUrl, price = 0 }) {
+    const dispatch = useDispatch();
 
     return (
         <div className={styled.product}>
             <div className={styled.image}>
                 <Link to={`/product/${id}`}>
-                    <img src={image} loading="lazy" alt={name} />
+                    <Image src={photoUrl} loading="lazy" alt={title} style={{ display: 'block' }} />
                 </Link>
             </div>
             <div className={styled.detail}>
-                <h3 className={styled.title}>{name}</h3>
+                <Title level={5} className={styled.title}>
+                    {title}
+                </Title>
                 <div className={styled.price}>{`$ ${price.toLocaleString()}`}</div>
                 <button
                     type="button"
                     className={classNames('btn', 'btn-danger', styled.addToCart)}
-                    onClick={handleAddToCartClick}
+                    onClick={() => dispatch(addToCart(id))}
                 >
                     Add to Cart
                 </button>
@@ -34,4 +37,4 @@ function Product({ id, name, image, price }) {
     );
 }
 
-export default Product;
+export default ProductCard;
