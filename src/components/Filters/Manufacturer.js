@@ -1,36 +1,38 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Checkbox } from 'antd';
+import { Checkbox, List } from 'antd';
 
+import useQueryState from '../../hooks/useQueryState';
 import { manufacturer } from '../../constants/defaults';
-import { addManufacturerToFilter, removeManufacturerFromFilter } from '../../actions/filterBy';
+import { addFilterByBrand, removeFilterByBrand } from '../../actions/filterBy';
 
-import styled from './manufacturer.module.scss';
+import './Manufacturer.scss';
 
 function Manufacturer() {
+    const { brand, setBrand } = useQueryState('brand', null);
     const dispatch = useDispatch();
 
     const handleCheckboxChange = (event) => {
         const { checked, name } = event.target;
         if (checked) {
-            dispatch(addManufacturerToFilter(name));
+            dispatch(addFilterByBrand(name));
         } else {
-            dispatch(removeManufacturerFromFilter(name));
+            dispatch(removeFilterByBrand(name));
         }
     };
 
     return (
-        <div className={styled.manufacturer}>
-            <div className={styled.heading}>Manufacturer</div>
-            <ul className={styled.list}>
-                {manufacturer.map((label) => (
-                    <li key={label}>
+        <div className="manufacturer">
+            <List
+                dataSource={manufacturer}
+                renderItem={(label) => (
+                    <List.Item key={label}>
                         <Checkbox name={label} onChange={handleCheckboxChange}>
                             {label}
                         </Checkbox>
-                    </li>
-                ))}
-            </ul>
+                    </List.Item>
+                )}
+            />
         </div>
     );
 }
