@@ -9,9 +9,9 @@ function CatalogContainer() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCatalog());
+        dispatch(fetchCatalog({ limit: 8 }));
         dispatch(fetchCategories());
-    }, [dispatch, fetchCatalog, fetchCategories]);
+    }, [dispatch]);
 
     return <Catalog />;
 }
