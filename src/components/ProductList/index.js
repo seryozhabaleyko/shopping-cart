@@ -1,5 +1,4 @@
 import React from 'react';
-import * as R from 'ramda';
 
 import Product from '../Product';
 import Alert from '../Alert';
@@ -12,7 +11,7 @@ import styled from './productList.module.scss';
 function ProductList() {
     const { isLoading, products, error } = useShallowEqualSelector(getCatalog);
 
-    if (isLoading || (R.not(R.length(products)) && R.not(error))) {
+    if (isLoading) {
         return <Spinner />;
     }
 
