@@ -21,15 +21,12 @@ function Filters() {
                     <RangeMinMaxPrice />
                 </Panel>
                 <Panel header="Оперативная память" key="3">
-                    12
+                    <RAM />
                 </Panel>
                 <Panel header="Флэш-память" key="4">
-                    12
+                    <InternalStorage />
                 </Panel>
             </Collapse>
-
-            <RAM />
-            <InternalStorage />
         </div>
     );
 }
