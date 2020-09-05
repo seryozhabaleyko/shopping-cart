@@ -74,23 +74,51 @@ const catalogLoadingSelector = (state) => state.catalog.loading;
 const catalogItemsSelector = (state) => state.catalog.data;
 const catalogErrorSelector = (state) => state.catalog.error;
 const catalogOrderBySelector = (state) => state.filterBy.orderBy;
+const catalogFilterByBrandSelector = (state) => state.filterBy.brand;
+const catalogFilterByPriceSelector = (state) => state.filterBy.price;
+const catalogFilterByRAMSelector = (state) => state.filterBy.ram;
+const catalogFilterByInternalStorageSelector = (state) => state.filterBy.internalStorage;
 
-const foo = createSelector(catalogItemsSelector, catalogOrderBySelector, (items, orderBy) => {
-    return items.sort((a, b) => {
-        switch (orderBy) {
-            case 'price-asc':
-                return a.price - b.price;
-            case 'price-desc':
-                return b.price - a.price;
-            default:
-                return b.createdAt.toDate() - a.createdAt.toDate();
-        }
-    });
-});
+const catalogItemsFilterBy = createSelector(
+    catalogItemsSelector,
+    catalogFilterByBrandSelector,
+    catalogFilterByPriceSelector,
+    catalogFilterByRAMSelector,
+    catalogFilterByInternalStorageSelector,
+    (items, filterByBrand, filterByPrice, filterByRAM, filterByInternalStorage) => {
+        if (!items || items.length === 0) return [];
+
+        return items.filter((item) => {
+            const matchBrand = filterByBrand.length !== 0 ? filterByBrand.includes(item.brand) : true;
+            const matchRAM = filterByRAM.length !== 0 ? filterByRAM.includes(item.ram) : true;
+            const matchInternalStorage =
+                filterByInternalStorage.length !== 0 ? filterByInternalStorage.includes(item.internalStorage) : true;
+
+            return matchBrand && matchRAM && matchInternalStorage;
+        });
+    },
+);
+
+const catalogItemsFilterByAndOrderBy = createSelector(
+    catalogItemsFilterBy,
+    catalogOrderBySelector,
+    (items, orderBy) => {
+        return items.sort((a, b) => {
+            switch (orderBy) {
+                case 'price-asc':
+                    return a.price - b.price;
+                case 'price-desc':
+                    return b.price - a.price;
+                default:
+                    return b.createdAt.toDate() - a.createdAt.toDate();
+            }
+        });
+    },
+);
 
 export const getCatalog = createSelector(
     catalogLoadingSelector,
-    foo,
+    catalogItemsFilterByAndOrderBy,
     catalogErrorSelector,
     (isLoading, products, error) => {
         const hasErrorMessage =
