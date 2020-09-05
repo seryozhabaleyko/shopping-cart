@@ -1,17 +1,34 @@
 import React from 'react';
-import { Checkbox } from 'antd';
+import { Checkbox, List } from 'antd';
 
 import styled from './InternalStorage.module.scss';
+import { useDispatch } from 'react-redux';
+import { addFilterByInternalStorage, removeFilterByInternalStorage } from '../../actions/filterBy';
 
 function InternalStorage() {
+    const dispatch = useDispatch();
+
+    const handleCheckboxChange = (event) => {
+        const { checked, name } = event.target;
+        if (checked) {
+            dispatch(addFilterByInternalStorage(name));
+        } else {
+            dispatch(removeFilterByInternalStorage(name));
+        }
+    };
+
     return (
         <div className={styled.storage}>
-            <div className={styled.heading}>Internal storage</div>
-            <div className={styled.list}>
-                {['32', '64', '128', '256'].map((label) => (
-                    <Checkbox key={label}>{`${label} GB`}</Checkbox>
-                ))}
-            </div>
+            <List
+                dataSource={['32', '64', '128', '256']}
+                renderItem={(label) => (
+                    <List.Item key={label}>
+                        <Checkbox name={label} onChange={handleCheckboxChange}>
+                            {label}
+                        </Checkbox>
+                    </List.Item>
+                )}
+            />
         </div>
     );
 }
