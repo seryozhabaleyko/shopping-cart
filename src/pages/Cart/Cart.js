@@ -1,100 +1,60 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, shallowEqual } from 'react-redux';
 import * as R from 'ramda';
-import classNames from 'classnames';
+import { Typography, Button } from 'antd';
 
 import Layout from '../../components/Layout';
-import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
-import useActions from '../../hooks/useActions';
-import { getBasketPhonesWithCount, getTheTotalCostOfTheBasket } from '../../selectors';
-import { basketCheckout, cleanBasket, removePhoneFromBasket } from '../../actions/cart';
+import CartList from './components/CartList';
+import { getCart, getNumberItemsCart, getTotalPrice } from '../../selectors';
 
-import styled from './cart.module.scss';
+import './Cart.scss';
 
-function Cart() {
-    const phones = useShallowEqualSelector((state) => getBasketPhonesWithCount(state));
-    const totalPrice = useShallowEqualSelector((state) => getTheTotalCostOfTheBasket(state));
-    const isCartEmpty = R.isEmpty(phones);
+const { Title } = Typography;
 
-    const [removePhoneFromBasketActionDispatch, cleanBasketActionDispatch, basketCheckoutActionDispatch] = useActions([
-        removePhoneFromBasket,
-        cleanBasket,
-        basketCheckout,
-    ]);
-
-    console.log('isCartEmpty', isCartEmpty);
+function CartPage() {
+    const cart = useSelector(getCart, shallowEqual);
+    const numberItemsCart = useSelector(getNumberItemsCart, shallowEqual);
+    const totalPrice = useSelector(getTotalPrice, shallowEqual);
+    const isCartEmpty = R.isEmpty(cart);
 
     return (
         <Layout breakpoint="xl">
-            <div className={styled.cart}>
-                <div className={styled.heading}>
-                    <h1 className={styled.title}>Корзина</h1>
-                </div>
-                {isCartEmpty && (
+            <div className="cart">
+                <header className="cart__heading">
+                    <Title level={2} className="cart__title">
+                        Корзина
+                    </Title>
+                </header>
+
+                {isCartEmpty ? (
                     <>
-                        <p className={styled.warning}>
+                        <p className="cart__warning">
                             Корзина пуста. Перейдите в интернет-магазин, чтобы начать покупки.
                         </p>
-                        <Link to="/" className={classNames('btn', 'btn-danger', styled.btnCartEmpty)}>
+                        <Link to="/" className="btn btn-danger cart__btn-cart-empty">
                             Перейти в интернет-магазин
                         </Link>
+                    </>
+                ) : (
+                    <>
+                        <p className="review-item-table-count">
+                            <span className="review-item-table-count-msg">Всего позиций:</span>
+                            <span className="review-item-table-count-amount"> {numberItemsCart}</span>
+                        </p>
+
+                        <CartList products={cart} />
+
+                        <div>
+                            <div>Итого к оплате:</div>
+                            <div>{totalPrice}</div>
+                            <Button>Купить</Button>
+                        </div>
                     </>
                 )}
             </div>
         </Layout>
     );
-
-    /* return (
-        <main className="container">
-            <aside className="sidebar">
-                <section className="basket-panel">
-                    <Link to="/">
-                        <span>Continue shopping!</span>
-                    </Link>
-                    {R.not(isBasketEmpty) && (
-                        <div>
-                            <button onClick={cleanBasketActionDispatch}>Clean cart</button>
-                            <button onClick={() => basketCheckoutActionDispatch(phones)}>
-                                Checkout
-                            </button>
-                        </div>
-                    )}
-                </section>
-            </aside>
-            <section className="content">
-                {isBasketEmpty && <div>Your shopping cart is empty</div>}
-                <table className="basket">
-                    <tbody>
-                        {phones.map((phone, index) => (
-                            <tr key={index}>
-                                <td>
-                                    <img src={phone.image} alt={phone.name} />
-                                </td>
-                                <td>{phone.name}</td>
-                                <td>${phone.price}</td>
-                                <td>{phone.count}</td>
-                                <td>
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            removePhoneFromBasketActionDispatch(phone.id)
-                                        }
-                                    >
-                                        delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                {R.not(isBasketEmpty) && (
-                    <div className="price">
-                        <b>Total:</b>${totalPrice}
-                    </div>
-                )}
-            </section>
-        </main>
-    ); */
 }
 
-export default Cart;
+export default CartPage;
