@@ -1,6 +1,24 @@
 import * as R from 'ramda';
 import { createSelector } from 'reselect';
 
+const cartSelector = (state) => state.cart;
+const numberItemsCartSelector = (state) => state.cart.length;
+
+export const getCart = createSelector(cartSelector, (cart) => cart);
+export const getNumberItemsCart = createSelector(numberItemsCartSelector, (numberItemsCart) => numberItemsCart);
+export const getTotalPrice = createSelector(cartSelector, (cart) => {
+    let total = 0;
+
+    if (cart.length !== 0) {
+        const result = cart.map((product) => product.price * product.quantity).reduce((a, b) => a + b);
+        total = result.toFixed(2);
+    }
+
+    console.log(total);
+
+    return Number(total).toLocaleString();
+});
+
 const filterAndSortPhonesBy = createSelector(
     (state) => state.filterBy,
     (state) => state.catalog.sortBy,
