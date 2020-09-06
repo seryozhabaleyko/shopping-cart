@@ -1,0 +1,22 @@
+.cart {
+    position: relative;
+    padding: 2rem 0;
+
+    &__heading {
+        position: relative;
+    }
+
+    &__title {
+        margin: 0;
+    }
+
+    &__warning {
+        margin: 2rem 0;
+        font-size: 1rem;
+    }
+
+    &__btn-cart-empty {
+        border-radius: 0 !important;
+        font-size: 1.125rem !important;
+    }
+}
