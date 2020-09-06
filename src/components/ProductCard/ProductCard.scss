@@ -1,6 +1,46 @@
 .product-card {
     position: relative;
-    overflow: hidden;
+
+    &__image {
+        position: relative;
+        border: 2px solid #ecedef;
+
+        img {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        &::before {
+            content: '';
+            display: block;
+            height: 0;
+            background-color: #fff;
+            padding-bottom: 120%;
+        }
+    }
+
+    &__content {
+        padding: 20px;
+        text-align: center;
+    }
+
+    &__title {
+        margin: 0 0 0.5em 0 !important;
+    }
+
+    &__price {
+        font-size: 20px;
+        color: #1890ff;
+        font-size: 22px;
+        font-weight: 500;
+    }
 
     &__skeleton {
         svg {
