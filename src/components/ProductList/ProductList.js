@@ -1,15 +1,15 @@
 import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
-import { Skeleton } from 'antd';
 
 import ProductCard, { ProductCardSkeleton } from '../ProductCard';
 import Alert from '../Alert';
-import { getCatalog } from '../../selectors';
+import { getCatalog, getCart } from '../../selectors';
 
 import './ProductList.scss';
 
 function ProductList() {
     const { loading, products, error } = useSelector(getCatalog, shallowEqual);
+    const cart = useSelector(getCart, shallowEqual);
 
     if (loading) {
         return (
@@ -26,10 +26,12 @@ function ProductList() {
         return <Alert title={message} />;
     }
 
+    const foundOnBasket = (id) => cart.some((item) => item.id === id);
+
     return (
         <div className="product-list__grid">
             {products.map((product) => (
-                <ProductCard key={product.id} {...product} />
+                <ProductCard key={product.id} product={product} foundOnBasket={foundOnBasket(product.id)} />
             ))}
         </div>
     );
