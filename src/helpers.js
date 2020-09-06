@@ -16,7 +16,5 @@ export const isContainer = (breakpoint) => {
 };
 
 export const isLength = (items) => {
-    return items.length
-        ? items
-        : 'Упс! У нас нет таких товаров, попробуйте изменить условия поиска.';
+    return items.length ? items : 'Упс! У нас нет таких товаров, попробуйте изменить условия поиска.';
 };
