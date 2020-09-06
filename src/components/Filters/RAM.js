@@ -25,7 +25,7 @@ function RAM() {
                 renderItem={(label) => (
                     <List.Item key={label}>
                         <Checkbox name={label} onChange={handleCheckboxChange}>
-                            {label}
+                            {`${label} ГБ`}
                         </Checkbox>
                     </List.Item>
                 )}
