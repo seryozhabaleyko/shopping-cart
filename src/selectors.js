@@ -120,9 +120,9 @@ export const getCatalog = createSelector(
     catalogLoadingSelector,
     catalogItemsFilterByAndOrderBy,
     catalogErrorSelector,
-    (isLoading, products, error) => {
+    (loading, products, error) => {
         const hasErrorMessage =
-            R.not(isLoading) && R.not(R.length(products)) && R.not(error)
+            R.not(loading) && R.not(R.length(products)) && R.not(error)
                 ? {
                       ...error,
                       message: 'Упс! У нас нет таких товаров, попробуйте изменить условия поиска.',
@@ -130,7 +130,7 @@ export const getCatalog = createSelector(
                 : error;
 
         return {
-            isLoading,
+            loading,
             products,
             error: hasErrorMessage,
         };
