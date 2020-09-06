@@ -1,17 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Typography, Badge, Rate, Button } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, DeleteOutlined } from '@ant-design/icons';
 
-import { addToCart } from '../../actions/cart';
+import { addToBasket, removeFromBasket } from '../../actions/cart';
 
 import './ProductCard.scss';
 
 const { Title } = Typography;
 
-function ProductCard({ id, title, photoUrl, price = 0, rating = 0 }) {
+function ProductCard({ product, foundOnBasket }) {
     const dispatch = useDispatch();
+    const { id, title, photoUrl, price = 0, rating = 0 } = product;
+
+    const handleAddToBasketClick = () => dispatch(addToBasket(product));
+    const handleRemoveFromBasketClick = () => dispatch(removeFromBasket(product.id));
 
     return (
         <Badge.Ribbon text="В наличии" placement="start">
@@ -33,20 +38,38 @@ function ProductCard({ id, title, photoUrl, price = 0, rating = 0 }) {
 
                     <Rate disabled defaultValue={rating} />
 
-                    <Button
-                        type="primary"
-                        size="large"
-                        icon={<ShoppingCartOutlined />}
-                        style={{ marginTop: '1rem' }}
-                        block
-                        onClick={() => dispatch(addToCart(id))}
-                    >
-                        В корзину
-                    </Button>
+                    {foundOnBasket ? (
+                        <Button
+                            type="primary"
+                            size="large"
+                            icon={<DeleteOutlined />}
+                            style={{ marginTop: '1rem' }}
+                            block
+                            danger
+                            onClick={handleRemoveFromBasketClick}
+                        >
+                            Из корзины
+                        </Button>
+                    ) : (
+                        <Button
+                            type="primary"
+                            size="large"
+                            icon={<ShoppingCartOutlined />}
+                            style={{ marginTop: '1rem' }}
+                            block
+                            onClick={handleAddToBasketClick}
+                        >
+                            В корзину
+                        </Button>
+                    )}
                 </div>
             </div>
         </Badge.Ribbon>
     );
 }
+ProductCard.propType = {
+    product: PropTypes.object.isRequired,
+    foundOnBasket: PropTypes.bool,
+};
 
 export default ProductCard;
