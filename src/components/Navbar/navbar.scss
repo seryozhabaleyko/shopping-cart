@@ -8,9 +8,9 @@
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.9);
     -webkit-box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
-            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-            backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
 
     display: flex;
     align-items: center;
@@ -23,5 +23,27 @@
 }
 
 .nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 
+    display: flex;
+    align-items: center;
+
+    &__item {
+        margin-right: 20px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__link {
+        font-size: 1rem;
+        color: #555;
+
+        &.active {
+            color: #000;
+        }
+    }
 }
