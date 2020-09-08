@@ -4,13 +4,13 @@ import Layout from '../../components/Layout';
 import Products from '../../components/Products';
 import Filters from '../../components/Filters';
 
-import styled from './catalog.module.scss';
+import './Catalog.scss';
 
 function Catalog() {
     return (
         <Layout>
-            <div className={styled.catalog}>
-                <div className={styled.products}>
+            <div className="catalog">
+                <div className="catalog__products">
                     <Filters />
                     <Products />
                 </div>
