@@ -1,21 +1,18 @@
-import React, { Fragment } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import * as R from 'ramda';
 import classNames from 'classnames';
 
-import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
 import { getProductById } from '../../selectors';
 import { addToCart } from '../../actions/cart';
-import Cart from '../../components/Cart';
 import Layout from '../../components/Layout';
 
-import styled from './product.module.scss';
-import './style.scss';
+import './Product.scss';
 
 function Product() {
     const dispatch = useDispatch();
-    const { loading, data, error } = useShallowEqualSelector(getProductById);
+
+    const { loading, product, error } = useSelector(getProductById, shallowEqual);
 
     if (loading) {
         return <p>loading...</p>;
@@ -25,40 +22,26 @@ function Product() {
         return <p>{error.message}</p>;
     }
 
-    /* const renderFields = () => {
-        const columnField = R.compose(
-            R.toPairs,
-            R.pick(['cpu', 'camera', 'size', 'weight', 'display', 'battery', 'memory']),
-        )(phone);
-
-        return columnField.map(([key, value]) => (
-            <div className="details-column" key={key}>
-                <div className="details-title">
-                    <p>{key}:</p>
-                </div>
-                <div className="details-info">{value}</div>
-            </div>
-        ));
-    }; */
+    const { title = '', photoUrl = '' } = product;
 
     return (
-        <>
-            <Layout breakpoint="xl">
-                {/* <div className={styled.product}>
-                    <div className={styled.single}>
-                        <figure className={classNames('figure', 'figure-img', styled.image)}>
-                            <img src={photoUrl} alt={title} />
-                        </figure>
-                        <div className={styled.info}>info</div>
-                    </div>
-                </div> */}
-            </Layout>
+        <Layout breakpoint="xl">
+            <div className="product">
+                <header className="product__heading">
+                    <h1 className="product__title">{title}</h1>
+                </header>
 
-            <main className="container">
-                <aside className="sidebar">sidebar</aside>
-                <section className="content">content</section>
-            </main>
-        </>
+                <div className="product__grid">
+                    <div className="product__image">
+                        <img src={photoUrl} alt={title} />
+                    </div>
+
+                    <div className="product__body">
+                        <h4>Основные характеристики</h4>
+                    </div>
+                </div>
+            </div>
+        </Layout>
     );
 }
 
