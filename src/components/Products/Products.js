@@ -3,8 +3,8 @@ import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 import { Select, Typography } from 'antd';
 
 import ProductList from '../ProductList';
-import { setOrderBy } from '../../actions/filterBy';
 import LoadMore from '../LoadMore';
+import { setOrderBy } from '../../actions/filterBy';
 
 import './Products.scss';
 
@@ -19,6 +19,8 @@ const options = [
 function Products() {
     const dispatch = useDispatch();
     const orderBy = useSelector((state) => state.filterBy.orderBy, shallowEqual);
+    const productsLength = useSelector((state) => state.catalog.data.length, shallowEqual);
+    const total = useSelector((state) => state.catalog.total, shallowEqual);
 
     const handleChangeSelect = (value) => {
         dispatch(setOrderBy(value));
@@ -33,7 +35,7 @@ function Products() {
                 <Select style={{ minWidth: 160 }} options={options} value={orderBy} onChange={handleChangeSelect} />
             </div>
             <ProductList />
-            <LoadMore />
+            {productsLength < total && <LoadMore />}
         </div>
     );
 }
