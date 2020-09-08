@@ -2,18 +2,18 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { fetchProductById } from '../actions/product';
 import Product from '../pages/Product';
+import { fetchProductById } from '../actions/product';
 
-function ProductContainer({ addToCart }) {
-    const { id } = useParams();
+function ProductContainer() {
     const dispatch = useDispatch();
+    const { id } = useParams();
 
     useEffect(() => {
         dispatch(fetchProductById(id));
     }, [dispatch, id]);
 
-    return <Product addToCart={addToCart} />;
+    return <Product />;
 }
 
 export default ProductContainer;
