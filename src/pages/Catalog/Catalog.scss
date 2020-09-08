@@ -1,0 +1,10 @@
+.catalog {
+    position: relative;
+    padding: 50px 0;
+
+    &__products {
+        display: grid;
+        grid-template-columns: 20% 1fr;
+        column-gap: 30px;
+    }
+}
