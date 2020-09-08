@@ -14,10 +14,18 @@ export const getTotalPrice = createSelector(cartSelector, (cart) => {
         total = result.toFixed(2);
     }
 
-    console.log(total);
-
     return Number(total).toLocaleString();
 });
+
+const productLoading = (state) => state.product.isLoading;
+const productItems = (state) => state.product.data;
+const productError = (state) => state.product.error;
+
+export const getProductById = createSelector(productLoading, productItems, productError, (loading, product, error) => ({
+    loading,
+    product,
+    error,
+}));
 
 const filterAndSortPhonesBy = createSelector(
     (state) => state.filterBy,
@@ -153,21 +161,6 @@ export const getCatalog = createSelector(
             error: hasErrorMessage,
         };
     },
-);
-
-const productIsLoading = (state) => state.product.isLoading;
-const productData = (state) => state.product.data;
-const productErrorMessage = (state) => state.product.error;
-
-export const getProductById = createSelector(
-    productIsLoading,
-    productData,
-    productErrorMessage,
-    (isLoading, data, error) => ({
-        isLoading,
-        data,
-        error,
-    }),
 );
 
 const getActionCategoryId = (props) => R.path(['match', 'params', 'id'], props);
