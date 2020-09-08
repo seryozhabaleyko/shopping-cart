@@ -1,13 +1,12 @@
-import { fetchCatalogApi, loadMorePhones as loadMorePhonesApi } from '../api';
+import { fetchCatalogApi, loadMoreProductsApi } from '../api';
 import {
     GET_CATALOG_REQUEST,
     GET_CATALOG_SUCCESS,
     GET_CATALOG_FAILURE,
-    LOAD_MORE_REQUEST,
-    LOAD_MORE_SUCCESS,
-    LOAD_MORE_FAILURE,
+    LOAD_MORE_PRODUCTS_REQUEST,
+    LOAD_MORE_PRODUCTS_SUCCESS,
+    LOAD_MORE_PRODUCTS_FAILURE,
 } from '../constants/actionTypes';
-import { getRenderedPhonesLength } from '../selectors';
 import { defaultErrorMessage } from '../constants/defaults';
 
 const fetchCatalogRequest = () => ({
@@ -34,25 +33,26 @@ export const fetchCatalog = (queryParameters) => async (dispatch) => {
     }
 };
 
-export const loadMorePhones = () => async (dispatch, getState) => {
-    const offset = getRenderedPhonesLength(getState());
+const loadMoreProductsRequest = () => ({
+    type: LOAD_MORE_PRODUCTS_REQUEST,
+});
 
-    dispatch({
-        type: LOAD_MORE_REQUEST,
-    });
+const loadMoreProductsSuccess = (data) => ({
+    type: LOAD_MORE_PRODUCTS_SUCCESS,
+    payload: data,
+});
 
+const loadMoreProductsFailure = (error) => ({
+    type: LOAD_MORE_PRODUCTS_FAILURE,
+    payload: error,
+});
+
+export const loadMoreProducts = (lastVisible) => async (dispatch) => {
+    dispatch(loadMoreProductsRequest());
     try {
-        const phones = await loadMorePhonesApi({ offset });
-
-        dispatch({
-            type: LOAD_MORE_SUCCESS,
-            payload: phones,
-        });
+        const data = await loadMoreProductsApi(lastVisible);
+        dispatch(loadMoreProductsSuccess(data));
     } catch (error) {
-        dispatch({
-            type: LOAD_MORE_FAILURE,
-            payload: error,
-            error: true,
-        });
+        dispatch(loadMoreProductsFailure(error));
     }
 };
