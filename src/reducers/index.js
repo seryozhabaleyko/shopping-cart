@@ -4,7 +4,6 @@ import catalog from './catalog';
 import product from './product';
 import cart from './cart';
 import filterBy from './filterBy';
-import sortBy from './sortBy';
 
 import phonePage from './phonePage';
 import phonesPage from './phonesPage';
@@ -15,7 +14,6 @@ export default combineReducers({
     product,
     cart,
     filterBy,
-    sortBy,
     phonePage,
     phonesPage,
     categories,

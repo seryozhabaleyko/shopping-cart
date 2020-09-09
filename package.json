@@ -12,6 +12,7 @@
     "environs": "^0.4.5",
     "evergreen-ui": "^4.28.0",
     "firebase": "^7.19.1",
+    "lodash.debounce": "^4.0.8",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "query-string": "^6.13.1",
@@ -24,7 +25,6 @@
     "react-scripts": "^3.4.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "use-debounce": "^3.4.3"

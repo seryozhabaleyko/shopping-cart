@@ -1,14 +1,11 @@
 import * as R from 'ramda';
 
 import {
-    SET_MIN_PRICE_FILTER,
-    SET_MAX_PRICE_FILTER,
+    SET_FILTER_BY_PRICE,
     ADD_FILTER_BY_RAM,
     REMOVE_FILTER_BY_RAM,
     ADD_FILTER_BY_BRAND,
-    ADD_FILTER_BY_PRICE,
     REMOVE_FILTER_BY_BRAND,
-    REMOVE_FILTER_BY_PRICE,
     SET_ORDER_BY,
     ADD_FILTER_BY_INTERNAL_STORAGE,
     REMOVE_FILTER_BY_INTERNAL_STORAGE,
@@ -35,15 +32,10 @@ export default (state = initialState, { type, payload }) => {
                 brand: R.without(String(payload).toLowerCase(), R.prop('brand', state)),
             };
 
-        case SET_MIN_PRICE_FILTER:
+        case SET_FILTER_BY_PRICE:
             return {
                 ...state,
-                price: R.assoc('min', payload, R.prop('price', state)),
-            };
-        case SET_MAX_PRICE_FILTER:
-            return {
-                ...state,
-                price: R.assoc('max', payload, R.prop('price', state)),
+                price: payload,
             };
 
         case ADD_FILTER_BY_RAM:

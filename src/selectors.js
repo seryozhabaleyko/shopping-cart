@@ -119,8 +119,9 @@ const catalogItemsFilterBy = createSelector(
             const matchRAM = filterByRAM.length !== 0 ? filterByRAM.includes(item.ram) : true;
             const matchInternalStorage =
                 filterByInternalStorage.length !== 0 ? filterByInternalStorage.includes(item.internalStorage) : true;
+            const matchPrice = item.price >= filterByPrice[0] && item.price <= filterByPrice[1];
 
-            return matchBrand && matchRAM && matchInternalStorage;
+            return matchBrand && matchPrice && matchRAM && matchInternalStorage;
         });
     },
 );
