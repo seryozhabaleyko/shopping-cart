@@ -1,16 +1,16 @@
 import React from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Badge, Tooltip } from 'antd';
-import { ShoppingCartOutlined, ShoppingFilled, ShoppingOutlined } from '@ant-design/icons';
+import { ShoppingOutlined } from '@ant-design/icons';
 
 import { getNumberOfProducts, getTheTotalCostOfTheBasket } from '../../selectors';
-import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
 
 import styled from './cart.module.scss';
 
 function Cart() {
-    const numberProductsInCart = useShallowEqualSelector(getNumberOfProducts);
-    const totalCartValue = useShallowEqualSelector(getTheTotalCostOfTheBasket);
+    const numberProductsInCart = useSelector(getNumberOfProducts, shallowEqual);
+    const totalCartValue = useSelector(getTheTotalCostOfTheBasket, shallowEqual);
 
     return (
         <Tooltip title={`$${totalCartValue}`} placement="bottom">
