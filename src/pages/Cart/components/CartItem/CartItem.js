@@ -1,11 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, Rate } from 'antd';
+import { Button, Rate, Typography } from 'antd';
 import { MinusOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import { minusQtyItem, addQtyItem, removeFromBasket } from '../../../../actions/cart';
 
 import './CartItem.scss';
+
+const { Title } = Typography;
 
 function CartItem({ product = {} }) {
     const dispatch = useDispatch();
@@ -33,7 +35,7 @@ function CartItem({ product = {} }) {
 
             <div className="cart-item__info">
                 <header>
-                    <h3>{title}</h3>
+                    <Title level={3}>{title}</Title>
                     <Rate disabled defaultValue={rating} />
                 </header>
 
@@ -50,12 +52,17 @@ function CartItem({ product = {} }) {
                     </Button.Group>
                 </div>
 
-                <Button icon={<DeleteOutlined />} danger onClick={onRemoveFromBasket}>
-                    Убрать из корзины
-                </Button>
-            </div>
+                <div className="cart-item__price">
+                    <p>К оплате:</p>
+                    {`$${(price * quantity).toLocaleString()}`}
+                </div>
 
-            <div className="cart-item__price">{`$${(price * quantity).toLocaleString()}`}</div>
+                <div>
+                    <Button icon={<DeleteOutlined />} danger onClick={onRemoveFromBasket}>
+                        Убрать из корзины
+                    </Button>
+                </div>
+            </div>
         </article>
     );
 }
