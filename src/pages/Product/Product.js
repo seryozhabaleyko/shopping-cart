@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { Typography } from 'antd';
+import { Typography, Badge, Rate } from 'antd';
 
 import Layout from '../../components/Layout';
 import AddToCart from '../../components/AddToCart';
@@ -23,19 +23,24 @@ function Product() {
         return <p>{error.message}</p>;
     }
 
-    const { title = '', photoUrl = '' } = product;
+    const { title = '', photoUrl = '', price = 0, rating = 0, maxQuantity = 0 } = product;
+
+    const ribbonProps = maxQuantity ? { text: 'В наличии' } : { text: 'Нет в наличии', color: 'cyan' };
 
     return (
         <Layout breakpoint="xl">
             <div className="product">
                 <header className="product__heading">
                     <h1 className="product__title">{title}</h1>
+                    <Rate allowHalf defaultValue={rating} />
                 </header>
 
                 <div className="product__grid">
-                    <div className="product__image">
-                        <img src={photoUrl} alt={title} />
-                    </div>
+                    <Badge.Ribbon {...ribbonProps} placement="start">
+                        <div className="product__image">
+                            <img src={photoUrl} alt={title} />
+                        </div>
+                    </Badge.Ribbon>
 
                     <div className="product__body">
                         <Title level={4}>Основные характеристики</Title>
