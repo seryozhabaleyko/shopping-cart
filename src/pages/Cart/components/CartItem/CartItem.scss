@@ -1,6 +1,7 @@
 .cart-item {
-    display: flex;
-    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    column-gap: 2rem;
 
     &:last-child {
         margin-bottom: 0;
@@ -9,7 +10,6 @@
     &__image {
         position: relative;
         border: 2px solid #ecedef;
-        max-width: 224px;
 
         img {
             display: block;
@@ -21,10 +21,8 @@
 
     &__info {
         display: flex;
-        flex-grow: 1;
         flex-direction: column;
         justify-content: space-between;
-        margin-left: 2rem;
     }
 
     &__price {
