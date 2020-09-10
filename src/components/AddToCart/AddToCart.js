@@ -27,7 +27,13 @@ function AddToCart({ product }) {
             Убрать из корзины
         </Button>
     ) : (
-        <Button type="primary" size="large" icon={<ShoppingCartOutlined />} onClick={onAddToCart}>
+        <Button
+            type="primary"
+            size="large"
+            icon={<ShoppingCartOutlined />}
+            onClick={onAddToCart}
+            disabled={!product.maxQuantity}
+        >
             Добавить в корзину
         </Button>
     );
