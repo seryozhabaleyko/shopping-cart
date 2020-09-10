@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Button, Rate, Typography } from 'antd';
 import { MinusOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -35,7 +36,9 @@ function CartItem({ product = {} }) {
 
             <div className="cart-item__info">
                 <header>
-                    <Title level={3}>{title}</Title>
+                    <Title className="cart-item__title" level={3}>
+                        {title}
+                    </Title>
                     <Rate disabled defaultValue={rating} />
                 </header>
 
@@ -66,5 +69,9 @@ function CartItem({ product = {} }) {
         </article>
     );
 }
+
+CartItem.propType = {
+    product: PropTypes.object.isRequired,
+};
 
 export default CartItem;
