@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, shallowEqual } from 'react-redux';
 import * as R from 'ramda';
 import { Typography, Button } from 'antd';
@@ -10,9 +10,10 @@ import { getCart, getNumberItemsCart, getTotalPrice } from '../../selectors';
 
 import './Cart.scss';
 
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 function CartPage() {
+    const history = useHistory();
     const cart = useSelector(getCart, shallowEqual);
     const numberItemsCart = useSelector(getNumberItemsCart, shallowEqual);
     const totalPrice = useSelector(getTotalPrice, shallowEqual);
@@ -29,12 +30,12 @@ function CartPage() {
 
                 {isCartEmpty ? (
                     <>
-                        <p className="cart__warning">
+                        <Paragraph className="cart__warning">
                             Корзина пуста. Перейдите в интернет-магазин, чтобы начать покупки.
-                        </p>
-                        <Link to="/" className="btn btn-danger cart__btn-cart-empty">
+                        </Paragraph>
+                        <Button size="large" danger onClick={() => history.push('/catalog')}>
                             Перейти в интернет-магазин
-                        </Link>
+                        </Button>
                     </>
                 ) : (
                     <>
@@ -45,10 +46,18 @@ function CartPage() {
 
                         <CartList products={cart} />
 
-                        <div>
-                            <div>Итого к оплате:</div>
-                            <div>{totalPrice}</div>
-                            <Button>Купить</Button>
+                        <div style={{ marginTop: '2rem' }}>
+                            <div className="cart__total-price">
+                                <div>Итого к оплате:</div>
+                                <div className="price">{`$ ${totalPrice}`}</div>
+                            </div>
+                            <Button
+                                type="primary"
+                                size="large"
+                                style={{ marginTop: '1rem', paddingLeft: '3rem', paddingRight: '3rem' }}
+                            >
+                                Купить
+                            </Button>
                         </div>
                     </>
                 )}
