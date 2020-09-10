@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import * as R from 'ramda';
-import classNames from 'classnames';
 
 import { getProductById } from '../../selectors';
-import { addToCart } from '../../actions/cart';
 import Layout from '../../components/Layout';
 
 import './Product.scss';
