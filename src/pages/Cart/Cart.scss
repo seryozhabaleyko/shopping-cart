@@ -19,4 +19,18 @@
         border-radius: 0 !important;
         font-size: 1.125rem !important;
     }
+
+    &__total-price {
+        > div {
+            &:first-child {
+                margin-bottom: 0.5rem;
+                font-size: 1rem;
+            }
+
+            &:last-child {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+        }
+    }
 }
