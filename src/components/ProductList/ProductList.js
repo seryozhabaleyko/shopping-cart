@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
+import { Alert } from 'antd';
 
 import ProductCard, { ProductCardSkeleton } from '../ProductCard';
-import Alert from '../Alert';
 import { getCatalog, getCart } from '../../selectors';
 
 import './ProductList.scss';
@@ -22,8 +22,12 @@ function ProductList() {
     }
 
     if (error) {
-        const { message = '' } = error;
-        return <Alert title={message} />;
+        const { name = 'Error', message = 'Something is wrong.' } = error;
+        return (
+            <div style={{ margin: '2rem 0' }}>
+                <Alert message={name} description={message} type="error" showIcon />
+            </div>
+        );
     }
 
     const foundOnBasket = (id) => cart.some((item) => item.id === id);
