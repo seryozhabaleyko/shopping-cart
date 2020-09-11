@@ -1,0 +1,14 @@
+.footer {
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    &__top {
+        background-color: #f7f7f7;
+        padding: 2rem 0;
+        min-height: 120px;
+    }
+
+    &__bottom {
+        padding: 20px 0;
+    }
+}
