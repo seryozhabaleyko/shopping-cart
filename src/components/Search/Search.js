@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { Input } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
-
-import searchPhone from '../../actions/search';
 
 const { Search } = Input;
 
@@ -17,18 +14,6 @@ const suffix = (
 );
 
 function SearchTopBar() {
-    const [search, setSearch] = useState('');
-    const dispatch = useDispatch();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(searchPhone(search));
-    };
-
-    const handleChange = (e) => {
-        setSearch(e.target.value);
-    };
-
     return (
         <Search
             placeholder="Введите запрос"
