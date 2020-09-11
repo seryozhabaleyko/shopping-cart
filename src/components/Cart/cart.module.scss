@@ -2,46 +2,13 @@
     display: inline-flex;
     align-items: center;
 
-    transition: transform .3s ease 0s;
+    transition: transform 0.3s ease 0s;
 
     &:hover {
         .icon {
-
             svg {
                 transform: scale(1.2);
             }
         }
     }
-}
-
-.icon {
-    position: relative;
-
-    svg {
-        transition: transform .3s ease 0s;
-    }
-}
-
-.number {
-    position: absolute;
-    top: -9px;
-    right: -9px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 18px;
-    height: 18px;
-
-    font-size: 10px;
-
-    color: #fff;
-    background-color: #eb0028;
-
-    border-radius: 50%;
-}
-
-.price {
-
 }
