@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { Typography, Badge, Rate } from 'antd';
+import { useSelector, shallowEqual } from 'react-redux';
+import { Typography, Badge, Rate, Alert } from 'antd';
 
 import Layout from '../../components/Layout';
 import AddToCart from '../../components/AddToCart';
@@ -11,8 +11,6 @@ import './Product.scss';
 const { Title } = Typography;
 
 function Product() {
-    const dispatch = useDispatch();
-
     const { loading, product, error } = useSelector(getProductById, shallowEqual);
 
     if (loading) {
@@ -20,7 +18,8 @@ function Product() {
     }
 
     if (error) {
-        return <p>{error.message}</p>;
+        const { name = 'Error', message = 'Something is wrong.' } = error;
+        return <Alert message={name} description={message} type="error" showIcon />;
     }
 
     const { title = '', photoUrl = '', price = 0, rating = 0, maxQuantity = 0 } = product;
