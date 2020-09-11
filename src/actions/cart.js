@@ -10,7 +10,7 @@ export const removeFromBasket = (id) => ({
     payload: id,
 });
 
-export const cleanBasket = () => ({
+export const clearCart = () => ({
     type: CLEAR_CART,
 });
 
