@@ -7,6 +7,7 @@ import { MinusOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { minusQtyItem, addQtyItem, removeFromBasket } from '../../../../actions/cart';
 
 import './CartItem.scss';
+import { Link } from 'react-router-dom';
 
 const { Title } = Typography;
 
@@ -30,20 +31,24 @@ function CartItem({ product = {} }) {
 
     return (
         <article className="cart-item">
-            <div className="cart-item__image">
-                <img src={photoUrl} alt={title} />
-            </div>
+            <Link to={`/product/${id}`}>
+                <div className="cart-item__image">
+                    <img src={photoUrl} alt={title} />
+                </div>
+            </Link>
 
             <div className="cart-item__info">
                 <header>
-                    <Title className="cart-item__title" level={3}>
-                        {title}
-                    </Title>
+                    <Link to={`/product/${id}`}>
+                        <Title className="cart-item__title" level={3}>
+                            {title}
+                        </Title>
+                    </Link>
                     <Rate disabled defaultValue={rating} />
                 </header>
 
-                <div>
-                    <p>Количество:</p>
+                <div className="cart-item__count">
+                    <div>Количество:</div>
                     <Button.Group>
                         <Button disabled={quantity <= 1} onClick={onMinusQty}>
                             <MinusOutlined />
@@ -56,8 +61,8 @@ function CartItem({ product = {} }) {
                 </div>
 
                 <div className="cart-item__price">
-                    <p>К оплате:</p>
-                    {`$${(price * quantity).toLocaleString()}`}
+                    <div>Цена:</div>
+                    <div>{`$${(price * quantity).toLocaleString()}`}</div>
                 </div>
 
                 <div>
