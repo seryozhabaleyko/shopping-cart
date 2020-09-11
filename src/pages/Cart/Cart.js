@@ -6,7 +6,7 @@ import { Typography, Button } from 'antd';
 
 import Layout from '../../components/Layout';
 import CartList from './components/CartList';
-import { getCart, getNumberItemsCart, getTotalPrice } from '../../selectors';
+import { getCart, getNumberCartItems, getTotalPrice } from '../../selectors';
 
 import './Cart.scss';
 
@@ -15,7 +15,7 @@ const { Title, Paragraph } = Typography;
 function CartPage() {
     const history = useHistory();
     const cart = useSelector(getCart, shallowEqual);
-    const numberItemsCart = useSelector(getNumberItemsCart, shallowEqual);
+    const numberCartItems = useSelector(getNumberCartItems, shallowEqual);
     const totalPrice = useSelector(getTotalPrice, shallowEqual);
     const isCartEmpty = R.isEmpty(cart);
 
@@ -41,7 +41,7 @@ function CartPage() {
                     <>
                         <p className="review-item-table-count">
                             <span className="review-item-table-count-msg">Всего позиций:</span>
-                            <span className="review-item-table-count-amount"> {numberItemsCart}</span>
+                            <span className="review-item-table-count-amount"> {numberCartItems}</span>
                         </p>
 
                         <CartList products={cart} />
@@ -49,7 +49,7 @@ function CartPage() {
                         <div style={{ marginTop: '2rem' }}>
                             <div className="cart__total-price">
                                 <div>Итого к оплате:</div>
-                                <div className="price">{`$ ${totalPrice}`}</div>
+                                <div>{`$${totalPrice.toLocaleString()}`}</div>
                             </div>
                             <Button
                                 type="primary"
