@@ -3,7 +3,9 @@
     padding: 2rem 0;
 
     &__heading {
-        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     &__title {
@@ -13,11 +15,6 @@
     &__warning {
         margin: 2rem 0;
         font-size: 1rem;
-    }
-
-    &__btn-cart-empty {
-        border-radius: 0 !important;
-        font-size: 1.125rem !important;
     }
 
     &__total-price {
@@ -32,5 +29,13 @@
                 font-weight: bold;
             }
         }
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+
+        padding-top: 1.5rem;
+        border-top: 1px solid #d9d9d9;
     }
 }
