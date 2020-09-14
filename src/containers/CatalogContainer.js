@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 
-import { fetchCatalog } from '../actions/catalog';
+import { fetchProducts } from '../actions/catalog';
 import Catalog from '../pages/Catalog';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
@@ -12,7 +12,7 @@ function CatalogContainer() {
 
     useEffect(() => {
         if (productsLength === 0) {
-            dispatch(fetchCatalog({ limit: 8 }));
+            dispatch(fetchProducts({ limit: 8 }));
         }
     }, [dispatch, productsLength]);
 
