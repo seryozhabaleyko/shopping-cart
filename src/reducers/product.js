@@ -14,6 +14,7 @@ export default (state = initialState, { type, payload }) => {
             return { ...state, loading: false, data: payload };
         case GET_PRODUCT_FAILURE:
             return { ...state, loading: false, error: payload };
+
         default:
             return state;
     }
