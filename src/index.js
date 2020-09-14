@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import store from './store';
+import configureStore from './store/configureStore';
+import rootSaga from './sagas/rootSaga';
 import App from './App';
 
 import './index.scss';
 import 'antd/dist/antd.css';
+
+const store = configureStore();
+store.runSaga(rootSaga);
 
 ReactDOM.render(
     <React.StrictMode>
