@@ -4,17 +4,22 @@ import { Typography, Badge, Rate, Alert } from 'antd';
 
 import Layout from '../../components/Layout';
 import AddToCart from '../../components/AddToCart';
-import { getProductById } from '../../selectors';
+import ProductLoader from './ProductLoader';
+import { getProduct } from '../../selectors';
 
 import './Product.scss';
 
 const { Title } = Typography;
 
 function Product() {
-    const { loading, product, error } = useSelector(getProductById, shallowEqual);
+    const { loading, product, error } = useSelector(getProduct, shallowEqual);
 
     if (loading) {
-        return <p>loading...</p>;
+        return (
+            <Layout breakpoint="xl">
+                <ProductLoader />
+            </Layout>
+        );
     }
 
     if (error) {
