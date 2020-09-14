@@ -18,15 +18,16 @@ export const getTotalPrice = createSelector(getCart, (cart) => {
     return total;
 });
 
-const productLoading = (state) => state.product.isLoading;
-const productItems = (state) => state.product.data;
-const productError = (state) => state.product.error;
-
-export const getProductById = createSelector(productLoading, productItems, productError, (loading, product, error) => ({
-    loading,
-    product,
-    error,
-}));
+export const getProduct = createSelector(
+    (state) => state.product.loading,
+    (state) => state.product.data,
+    (state) => state.product.error,
+    (loading, product, error) => ({
+        loading,
+        product,
+        error,
+    }),
+);
 
 const catalogLoadingSelector = (state) => state.catalog.loading;
 const catalogItemsSelector = (state) => state.catalog.data;
@@ -84,6 +85,7 @@ export const getCatalog = createSelector(
             R.not(loading) && R.not(R.length(products)) && R.not(error)
                 ? {
                       ...error,
+                      name: 'Фильтр',
                       message: 'Упс! У нас нет таких товаров, попробуйте изменить условия поиска.',
                   }
                 : error;
