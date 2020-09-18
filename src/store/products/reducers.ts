@@ -4,6 +4,9 @@ import {
     FETCH_PRODUCTS_REQUEST,
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
+    LOAD_MORE_PRODUCTS_REQUEST,
+    LOAD_MORE_PRODUCTS_SUCCESS,
+    LOAD_MORE_PRODUCTS_FAILURE,
 } from '../products/types';
 
 const initialState: ProductsState = {
@@ -30,7 +33,7 @@ function productsReducer(state: ProductsState = initialState, { type, payload }:
         case FETCH_PRODUCTS_FAILURE:
             return { ...state, loading: false, error: payload };
 
-        /* case LOAD_MORE_PRODUCTS_REQUEST:
+        case LOAD_MORE_PRODUCTS_REQUEST:
             return { ...state, loadingLoadMore: true, error: null };
         case LOAD_MORE_PRODUCTS_SUCCESS:
             return {
@@ -40,7 +43,7 @@ function productsReducer(state: ProductsState = initialState, { type, payload }:
                 lastVisible: payload.lastVisible,
             };
         case LOAD_MORE_PRODUCTS_FAILURE:
-            return { ...state, loadingLoadMore: false, error: payload }; */
+            return { ...state, loadingLoadMore: false, error: payload };
 
         default:
             return state;
