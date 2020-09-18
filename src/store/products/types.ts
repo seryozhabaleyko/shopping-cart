@@ -39,4 +39,38 @@ export interface FetchProductsFailure {
     payload: Error;
 }
 
-export type ProductsActionsTypes = FetchProductsRequest | FetchProductsSuccess | FetchProductsFailure;
+export const LOAD_MORE_PRODUCTS = 'LOAD_MORE_PRODUCTS';
+
+export interface LoadMoreProducts {
+    type: typeof LOAD_MORE_PRODUCTS;
+    lastVisible: any;
+}
+
+export const LOAD_MORE_PRODUCTS_REQUEST = 'LOAD_MORE_PRODUCTS_REQUEST';
+
+export interface LoadMoreProductsRequest {
+    type: typeof LOAD_MORE_PRODUCTS_REQUEST;
+    payload?: any;
+}
+
+export const LOAD_MORE_PRODUCTS_SUCCESS = 'LOAD_MORE_PRODUCTS_SUCCESS';
+
+export interface LoadMoreProductsSuccess {
+    type: typeof LOAD_MORE_PRODUCTS_SUCCESS;
+    payload: Product[];
+}
+
+export const LOAD_MORE_PRODUCTS_FAILURE = 'LOAD_MORE_PRODUCTS_FAILURE';
+
+export interface LoadMoreProductsFailure {
+    type: typeof LOAD_MORE_PRODUCTS_FAILURE;
+    payload: Error;
+}
+
+export type ProductsActionsTypes =
+    | FetchProductsRequest
+    | FetchProductsSuccess
+    | FetchProductsFailure
+    | LoadMoreProductsRequest
+    | LoadMoreProductsSuccess
+    | LoadMoreProductsFailure;
