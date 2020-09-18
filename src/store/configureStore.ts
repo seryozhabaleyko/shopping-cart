@@ -2,9 +2,9 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
-import rootReducer from '../reducers';
+import rootReducer from './rootReducer';
 
-function configureStore(initialState: any) {
+function configureStore(initialState: any = {}) {
     const sagaMiddleware = createSagaMiddleware();
 
     return {
