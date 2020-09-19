@@ -1,5 +1,5 @@
 export type Loading = boolean;
-export type Error = object | string | null;
+export type Error = { name?: string; message?: string } | null;
 export interface Product {
     id: string;
     title: string;
@@ -8,6 +8,10 @@ export interface Product {
     rating: number;
     quantity: number;
     maxQuantity: number;
+    createdAt: any;
+    brand: string;
+    ram: string;
+    internalStorage: string;
 }
 
 export interface ProductState {

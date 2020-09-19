@@ -1,7 +1,7 @@
 import { Product } from '../product/types';
 
 export type Loading = boolean;
-export type Error = object | string | null;
+export type Error = { name?: string; message?: string } | null;
 
 export interface ProductsState {
     loading: Loading;

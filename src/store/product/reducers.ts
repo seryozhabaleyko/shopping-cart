@@ -18,6 +18,10 @@ const initialState: ProductState = {
         rating: 0,
         quantity: 0,
         maxQuantity: 0,
+        createdAt: {},
+        brand: '',
+        ram: '',
+        internalStorage: '',
     },
     error: null,
 };

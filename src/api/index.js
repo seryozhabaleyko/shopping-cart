@@ -1,10 +1,10 @@
 import { db } from '../services/firebase';
 
-export async function fetchCatalogApi({ limit = 8 }) {
+export async function fetchProductsApi() {
     const totalQuery = await db.collection('catalog').get();
     const total = totalQuery.docs.length;
 
-    const catalogCollectionRef = db.collection('catalog').orderBy('createdAt', 'desc').limit(limit);
+    const catalogCollectionRef = db.collection('catalog').orderBy('createdAt', 'desc').limit(8);
 
     return catalogCollectionRef.get().then((snapshot) => {
         const lastVisible = snapshot.docs[snapshot.docs.length - 1];
